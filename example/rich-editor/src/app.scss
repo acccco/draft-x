@@ -1,0 +1,79 @@
+#root {
+  overflow: hidden;
+}
+
+.toolbar {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .ant-divider-vertical {
+    height: initial;
+    margin: 6px 8px;
+  }
+  .ant-btn {
+    border-radius: 2px;
+    padding: 0 8px;
+    margin: 3px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+.editor-contain {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 10px;
+  width: 750px;
+  margin: 20px auto;
+}
+
+.toolbar-wrap {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 5px;
+  background: #fff;
+}
+
+.editor-wrap {
+  height: 80vh;
+  padding: 10px;
+  .RichEditor-editor {
+    height: 100%;
+  }
+}
+
+.color-picker {
+  .rc-color-picker-panel-inner {
+    border: none;
+    box-shadow: none;
+  }
+  .rc-color-picker-panel-board-hsv {
+    width: auto;
+  }
+  .color-selected {
+    display: flex;
+    justify-content: space-evenly;
+    span {
+      width: 20px;
+      height: 20px;
+      box-shadow: 0 0 2px #999;
+      cursor: pointer;
+    }
+  }
+}
+
+.input {
+  border: 1px solid #f1f1f1;
+  outline: none;
+  margin: 8px 0;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.pop-footer {
+  text-align: center;
+  .ant-btn {
+    border-radius: 2px;
+    margin: 0 8px;
+  }
+}
