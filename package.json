@@ -1,6 +1,6 @@
 {
   "name": "draft-x",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "draft 富文本编辑器，基于插件开发",
   "main": "dist/index.js",
   "files": [
@@ -21,6 +21,7 @@
   "author": "aco",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "draft-js": "^0.10.5",
     "hex-to-rgba": "^1.0.2",
     "react": "^16.6.1",
@@ -31,7 +32,6 @@
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.0.0",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
     "cross-env": "^5.2.0",
