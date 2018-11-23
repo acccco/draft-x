@@ -50,6 +50,15 @@ export default props => {
         <NormalBtn
           icon="undo"
           action={() => {
+            plugin.iframe.toggle({
+              src: "http://www.baidu.com",
+              width: 80
+            });
+          }}
+        />
+        <NormalBtn
+          icon="undo"
+          action={() => {
             plugin.undoPlugin.toggle();
           }}
         />

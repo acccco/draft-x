@@ -6,13 +6,13 @@
  * @Description: description
  */
 
-import BaseStyle from './BaseStyle';
+import BaseBS from "./BaseBS";
 
-export default class AlignStyle extends BaseStyle {
+export default class AlignStyle extends BaseBS {
   constructor() {
     super();
-    this.name = 'text-align';
-    this.types = ['align-left', 'align-center', 'align-right'];
-    this.nameSpace = 'RichEditor-text';
+    this.name = "text-align";
+    this.types = ["align-left", "align-center", "align-right"];
+    this.nameSpace = "RichEditor";
   }
 }

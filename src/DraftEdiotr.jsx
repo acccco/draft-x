@@ -2,28 +2,33 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:02:21
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-20 14:22:15
- * @Description: 编辑器实例
+ * @LastEditTime: 2018-11-23 13:27:51
+ * @Description: 对外暴露的 Draft 实例
  */
 
 import React from "react";
+import ReactDOMServer from "react-dom/server";
 import {
   Editor,
   CompositeDecorator,
   EditorState,
   RichUtils,
-  getDefaultKeyBinding
+  getDefaultKeyBinding,
+  convertToRaw,
+  convertFromRaw
 } from "draft-js";
 import "./RichEditor.scss";
 
 export default class DraftEditor extends React.Component {
   constructor(props) {
     super(props);
-    const { onChange, plugin, editorState } = props;
+    const { onChange, plugin } = props;
 
     this.editor = React.createRef();
+    this.customStyleMap = {};
 
     // get/set editorState
+    // eslint-disable-next-line
     this.getEditorState = () => this.props.editorState;
     this.applyChange = state => {
       onChange(state);
@@ -37,19 +42,34 @@ export default class DraftEditor extends React.Component {
     });
 
     // decorators
-    const decorators = editorState.getDecorator()
-      ? editorState.getDecorator()._decorators
-      : [];
-    const newDecorator = new CompositeDecorator([
-      ...decorators,
-      ...this.getDecorator()
-    ]);
+    const newDecorator = new CompositeDecorator([...this.getDecorator()]);
     // end
 
     this.applyChange(
       EditorState.set(this.getEditorState(), { decorator: newDecorator })
     );
   }
+
+  /* eslint-disable */
+  coverRaw(editorState, json) {
+    const raw = JSON.parse(json);
+    const contentState = convertFromRaw(raw);
+    this.customStyleMap = raw.customStyleMap;
+    return EditorState.push(editorState, contentState, "adjust-depth");
+  }
+
+  getHtml() {
+    const editorState = this.getEditorState();
+    const raw = convertToRaw(editorState.getCurrentContent());
+    raw.customStyleMap = this.getCustomStyleMap();
+    return JSON.stringify(raw);
+  }
+
+  /* eslint-disable */
+  focus() {
+    this.editor.current.focus();
+  }
+  /* eslint-enable */
 
   getDecorator() {
     const { plugin } = this.props;
@@ -64,7 +84,7 @@ export default class DraftEditor extends React.Component {
 
   getCustomStyleMap() {
     const { plugin } = this.props;
-    let result = {};
+    let result = { ...this.customStyleMap } || {};
     Object.keys(plugin).forEach(key => {
       if ("customStyleMap" in plugin[key]) {
         result = {
@@ -74,24 +94,6 @@ export default class DraftEditor extends React.Component {
       }
     });
     return result;
-  }
-
-  getHtml() {
-    if (!this.editor || !this.editor.current || !this.editor.current.editor) {
-      return "请先实例化组件在调用，或是放在 setTimeout 中使用";
-    }
-    const { innerHTML } = this.editor.current.editor.children[0];
-    let pureHtml = innerHTML.replace(
-      /\s?data-(block|editor|offset|contents|text)(-\w*)?="[-\w]*"/gi,
-      ""
-    );
-    pureHtml = pureHtml.replace(/("\s*)|(\s*")/gi, '"');
-    pureHtml = pureHtml.replace(/\sclass=""/gi, "");
-    return pureHtml;
-  }
-
-  focus() {
-    this.editor.current.focus();
   }
 
   blockStyleFn(block) {

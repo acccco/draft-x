@@ -3,10 +3,10 @@ export default class FireQueue {
     this.queue = [];
     this.isFire = false;
     this.callBack = () => {
-      console.log('请为队列设置执行回调');
+      throw new Error("请为队列设置执行回调");
     };
     this.getInitValue = () => {
-      console.log('请为队列设置获取初始值的函数');
+      throw new Error("请为队列设置获取初始值的函数");
     };
   }
 

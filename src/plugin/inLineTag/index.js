@@ -3,11 +3,11 @@
  * @Date: 2018-11-08 13:55:09
  * @LastEditors: Aco
  * @LastEditTime: 2018-11-08 14:01:08
- * @Description: 一些行内标签插件
+ * @Description: 用于将选中区域用一个行内标签包裹
  */
 
-import BaseTag from './BaseTag';
-import Link from './Link';
-import RemoveTag from './RemoveTag';
+import Link from "./Link";
+import RemoveTag from "./RemoveTag";
+import BaseTag from "./BaseIT";
 
 export { BaseTag, Link, RemoveTag };

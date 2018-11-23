@@ -1,4 +1,4 @@
-import { EditorState } from 'draft-js';
+import { EditorState } from "draft-js";
 
 export function createNewEntity(editorState, option) {
   const contentState = editorState.getCurrentContent();
@@ -9,12 +9,12 @@ export function createNewEntity(editorState, option) {
   );
   const entityKey = nextContentState.getLastCreatedEntityKey();
   const nextEditorState = EditorState.set(editorState, {
-    currentContent: nextContentState,
+    currentContent: nextContentState
   });
   return {
     entityKey,
     contentState: nextContentState,
-    editorState: nextEditorState,
+    editorState: nextEditorState
   };
 }
 

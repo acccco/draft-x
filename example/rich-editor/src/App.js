@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { EditorState } from "draft-js";
 import DraftEdiotr, {
   NormalStyle,
-  BaseBlock,
+  RemoveStyle,
+  CustomStyle,
+  BaseBT,
   AlignStyle,
   Link,
   RemoveTag,
   Image,
-  FontSize,
-  RemoveStyle,
   Undo,
   Redo,
-  TextColor,
-  BGColor
+  Iframe,
+  raw2html
 } from "draft-x";
 import ToolBar from "./toolbar/ToolBar";
 import "draft-x/dist/draft.css";
@@ -22,6 +22,7 @@ class App extends Component {
   constructor() {
     super();
     this.editor = React.createRef();
+
     this.state = {
       editorState: EditorState.createEmpty()
     };
@@ -58,12 +59,16 @@ class App extends Component {
         },
         true
       ),
-      baseBlockList: new BaseBlock(["UL", "OL"]),
+      fontSize: new CustomStyle("fontSize"),
+      textColor: new CustomStyle("color"),
+      bGColor: new CustomStyle("backgroundColor"),
+      removeStyle: new RemoveStyle(),
       alignStyle: new AlignStyle(),
       link: new Link(),
       removeTag: new RemoveTag(),
       image: new Image(),
-      baseBlock: new BaseBlock([
+      baseBlockList: new BaseBT(["UL", "OL"]),
+      baseBlock: new BaseBT([
         "Normal",
         "H1",
         "H2",
@@ -72,13 +77,15 @@ class App extends Component {
         "Blockquote",
         "Code Block"
       ]),
-      fontSize: new FontSize(),
-      removeStyle: new RemoveStyle(),
       undoPlugin: new Undo(),
       redoPlugin: new Redo(),
-      textColor: new TextColor(),
-      bGColor: new BGColor()
+      iframe: new Iframe()
     };
+  }
+
+  componentDidMount() {
+    const json = `{"blocks":[{"key":"7e41j","text":" IB ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":1,"length":2,"key":0}],"data":{}}],"entityMap":{"0":{"type":"IFRAME","mutability":"IMMUTABLE","data":{"src":"http://blog.acohome.cn","width":80}}},"customStyleMap":{"bold":{"fontWeight":"bold"},"lineThrough":{"textDecoration":"line-through"},"underLine":{"textDecoration":"underline"},"italic":{"fontStyle":"italic"},"top":{"position":"relative","top":"-8px","display":"inline-flex","fontSize":"12px"},"bottom":{"position":"relative","bottom":"-8px","display":"inline-flex","fontSize":"12px"}}}`;
+    console.log(raw2html(json));
   }
 
   onChange(editorState) {

@@ -1,13 +1,13 @@
 /*
  * @Author: Aco
  * @Date: 2018-11-05 14:21:34
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2018-11-13 14:32:30
- * @Description: description
+ * @LastEditors: Aco
+ * @LastEditTime: 2018-11-23 13:15:33
+ * @Description: 用于匹配文本中的符合传入的正则表达式
  */
 
-import React from 'react';
-import BaseDecoretor from './BaseDecorator';
+import React from "react";
+import BaseDecoretor from "./BaseDecorator";
 
 function findWithRegex(regex, contentBlock, callback) {
   const text = contentBlock.getText();
@@ -22,7 +22,7 @@ function findWithRegex(regex, contentBlock, callback) {
 }
 
 const defaultStyle = {
-  color: 'rgba(98, 177, 254, 1.0)',
+  color: "rgba(98, 177, 254, 1.0)"
 };
 
 export default class Regex extends BaseDecoretor {

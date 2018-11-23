@@ -6,9 +6,8 @@
  * @Description: 一些控制插件
  */
 
-import InsertIframe from './InsertIframe';
-import InsertText from './InsertText';
-import Redo from './Redo';
-import Undo from './Undo';
+import InsertText from "./InsertText";
+import Redo from "./Redo";
+import Undo from "./Undo";
 
-export { InsertIframe, InsertText, Redo, Undo };
+export { InsertText, Redo, Undo };

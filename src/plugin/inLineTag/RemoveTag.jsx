@@ -6,19 +6,13 @@
  * @Description: 为选中区域移除标签
  */
 
-import { RichUtils } from 'draft-js';
-import Base from '../Base';
+import { RichUtils } from "draft-js";
+import Base from "../Base";
 
 export default class RemoveTag extends Base {
-  use(create, option = {}) {
-    return create({
-      option,
-      value: { key: 'remove-tag', label: 'remove-tag' },
-      toggle: () => this.toggle(),
-    });
-  }
-
   toggle() {
-    this.fire(editorState => RichUtils.toggleLink(editorState, editorState.getSelection(), null));
+    this.fire(editorState =>
+      RichUtils.toggleLink(editorState, editorState.getSelection(), null)
+    );
   }
 }

@@ -12,7 +12,8 @@ module.exports = {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "umd",
-    library: "DraftX"
+    library: "DraftX",
+    globalObject: "this"
   },
   plugins: [
     new cleanWebpackPlugin(["./dist"]),

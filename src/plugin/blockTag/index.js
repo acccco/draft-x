@@ -6,7 +6,7 @@
  * @Description: 一些基础的块级样式插件
  */
 
-import BaseBlock from './BaseBlock';
+import BaseBT from "./BaseBT";
 
 // eslint-disable-next-line
-export { BaseBlock };
+export { BaseBT };

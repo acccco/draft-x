@@ -18,28 +18,28 @@
   padding: 10px 20px;
 }
 
-.RichEditor-text-align-center {
+.RichEditor-align-center {
   text-align: center !important;
   & > div {
     display: inline;
   }
 }
 
-.RichEditor-text-align-left {
+.RichEditor-align-left {
   text-align: left !important;
   & > div {
     display: inline;
   }
 }
 
-.RichEditor-text-align-right {
+.RichEditor-align-right {
   text-align: right !important;
   & > div {
     display: inline;
   }
 }
 
-.RichEditor-text-align-justify {
+.RichEditor-align-justify {
   text-align: justify !important;
   & > div {
     display: inline;

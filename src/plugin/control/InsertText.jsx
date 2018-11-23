@@ -2,34 +2,37 @@
  * @Author: Aco
  * @Date: 2018-11-07 13:22:13
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-19 17:04:53
- * @Description: description
+ * @LastEditTime: 2018-11-23 13:15:46
+ * @Description: 在光标区域插入特定的文本
  */
-import React from 'react';
-import { EditorState, Modifier } from 'draft-js';
-import Base from '../Base';
-import { createNewEntity, findEntityRange } from '../../util';
+import React from "react";
+import { EditorState, Modifier } from "draft-js";
+import Base from "../Base";
+import { createNewEntity, findEntityRange } from "../../util";
 
 export default class Insert extends Base {
   constructor(textList = []) {
     super();
     this.textList = textList;
-    this.entityType = 'Insert';
-    this.entityKey = '';
+    this.entityType = "Insert";
+    this.entityKey = "";
     this.decorator = {
       strategy: this.strategy.bind(this),
-      component: this.component.bind(this),
+      component: this.component.bind(this)
     };
   }
 
   init(getEditorState, applyChange) {
     super.init(getEditorState, applyChange);
     this.fire(editorState => {
-      const { entityKey, editorState: newEditorState } = createNewEntity(editorState, {
-        entityType: this.entityType,
-        mutability: 'IMMUTABLE',
-        data: {},
-      });
+      const { entityKey, editorState: newEditorState } = createNewEntity(
+        editorState,
+        {
+          entityType: this.entityType,
+          mutability: "IMMUTABLE",
+          data: {}
+        }
+      );
       this.entityKey = entityKey;
       return newEditorState;
     });
@@ -51,16 +54,31 @@ export default class Insert extends Base {
 
   toggle(text) {
     this.fire(editorState => {
-      const selection = editorState.getSelection();
+      let selection = editorState.getSelection();
       let nextContentState = editorState.getCurrentContent();
 
-      nextContentState = Modifier.insertText(nextContentState, selection, ' ');
+      editorState = EditorState.push(
+        editorState,
+        Modifier.removeRange(nextContentState, selection),
+        "remove-range"
+      );
 
-      nextContentState = Modifier.insertText(nextContentState, selection, text, '', this.entityKey);
+      selection = editorState.getSelection();
+      nextContentState = Modifier.insertText(nextContentState, selection, " ");
+      nextContentState = Modifier.insertText(
+        nextContentState,
+        selection,
+        text,
+        "",
+        this.entityKey
+      );
+      nextContentState = Modifier.insertText(nextContentState, selection, " ");
 
-      nextContentState = Modifier.insertText(nextContentState, selection, ' ');
-
-      return EditorState.push(editorState, nextContentState, 'insert-characters');
+      return EditorState.push(
+        editorState,
+        nextContentState,
+        "insert-characters"
+      );
     });
   }
 }

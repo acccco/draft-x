@@ -1,7 +1,8 @@
-import FireQueue from './FireQueue';
+import FireQueue from "./FireQueue";
+import raw2html from "./raw2html";
 
-export { FireQueue };
+export { FireQueue, raw2html };
 
-export * from './block';
-export * from './selection';
-export * from './entity';
+export * from "./block";
+export * from "./selection";
+export * from "./entity";

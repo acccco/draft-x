@@ -8,10 +8,9 @@
 
 export default class BaseDecoretor {
   constructor() {
-    this.mutability = 'MUTABLE';
     this.decorator = {
       strategy: this.strategy.bind(this),
-      component: this.component.bind(this),
+      component: this.component.bind(this)
     };
   }
 }

@@ -6,12 +6,9 @@
  * @Description: 一些行内样式插件
  */
 
-import BaseStyle from './BaseStyle';
-import FontFamily from './FontFamily';
-import FontSize from './FontSize';
-import NormalStyle from './NormalStyle';
-import RemoveStyle from './RemoveStyle';
-import TextColor from './TextColor';
-import BGColor from './BGColor';
+import BaseIS from "./BaseIS";
+import NormalStyle from "./NormalStyle";
+import RemoveStyle from "./RemoveStyle";
+import CustomStyle from "./CustomStyle";
 
-export { BaseStyle, FontFamily, FontSize, NormalStyle, RemoveStyle, TextColor, BGColor };
+export { BaseIS, NormalStyle, RemoveStyle, CustomStyle };

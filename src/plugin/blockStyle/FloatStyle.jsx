@@ -6,13 +6,13 @@
  * @Description: description
  */
 
-import BaseStyle from './BaseStyle';
+import BaseBS from "./BaseBS";
 
-export default class AlignStyle extends BaseStyle {
+export default class AlignStyle extends BaseBS {
   constructor() {
     super();
-    this.name = 'block-float';
-    this.types = ['float-left', 'float-right'];
-    this.nameSpace = 'RichEditor';
+    this.name = "block-float";
+    this.types = ["float-left", "float-right"];
+    this.nameSpace = "RichEditor";
   }
 }

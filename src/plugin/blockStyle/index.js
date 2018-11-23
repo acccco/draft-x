@@ -8,6 +8,6 @@
 
 import AlignStyle from './AlignStyle';
 import FloatStyle from './FloatStyle';
+import BaseBS from './BaseBS';
 
-// eslint-disable-next-line
-export { AlignStyle, FloatStyle };
+export { AlignStyle, FloatStyle, BaseBS };

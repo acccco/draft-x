@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-07 10:45:40
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-20 10:07:29
+ * @LastEditTime: 2018-11-23 09:52:46
  * @Description: 基础插件，所有插件必须继承此类
  */
 
@@ -16,13 +16,11 @@ export default class Base {
   }
 
   getEditorState() {
-    console.error("请确认是否调用了插件的 init 方法");
-    return false;
+    throw new Error("请确认是否调用了插件的 init 方法");
   }
 
   applyChange() {
-    console.error("请确认是否调用了插件的 init 方法");
-    return false;
+    throw new Error("请确认是否调用了插件的 init 方法");
   }
 
   init(getEditorState, applyChange) {

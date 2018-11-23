@@ -1,14 +1,14 @@
 /*
  * @Author: Aco
  * @Date: 2018-11-02 15:09:59
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2018-11-14 14:01:22
+ * @LastEditors: Aco
+ * @LastEditTime: 2018-11-23 13:14:35
  * @Description: 一些自定义样式
  */
 
-import BaseStyle from './BaseStyle';
+import BaseIS from "./BaseIS";
 
-export default class NormalStyle extends BaseStyle {
+export default class NormalStyle extends BaseIS {
   constructor(map, isUnipue = false) {
     super(isUnipue);
     this.customStyleMap = map;

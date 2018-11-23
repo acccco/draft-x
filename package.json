@@ -1,6 +1,6 @@
 {
   "name": "draft-x",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "draft 富文本编辑器，基于插件开发",
   "main": "dist/index.js",
   "files": [
@@ -15,7 +15,8 @@
     "url": "https://github.com/acccco/draft-x"
   },
   "scripts": {
-    "bulid": "webpack"
+    "bulid": "cross-env BABEL_ENV=webpack webpack",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib"
   },
   "author": "aco",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "@babel/runtime": "^7.0.0",
     "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
+    "cross-env": "^5.2.0",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
