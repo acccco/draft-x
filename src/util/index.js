@@ -1,7 +1,7 @@
 import FireQueue from "./FireQueue";
-import raw2html from "./raw2html";
+import json2html from "./json2html";
 
-export { FireQueue, raw2html };
+export { FireQueue, json2html };
 
 export * from "./block";
 export * from "./selection";
