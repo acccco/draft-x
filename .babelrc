@@ -1,16 +1,17 @@
 {
   "env": {
     "cjs": {
-      "presets": [
+      "presets": [["@babel/preset-react"]],
+      "plugins": [
         [
-          "@babel/preset-env",
+          "@babel/plugin-transform-runtime",
           {
-            "useBuiltIns": "entry"
+            "corejs": false,
+            "helpers": true,
+            "regenerator": true,
+            "useESModules": true
           }
         ],
-        ["@babel/preset-react"]
-      ],
-      "plugins": [
         [
           "@babel/plugin-transform-modules-commonjs",
           {

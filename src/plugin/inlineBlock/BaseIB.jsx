@@ -2,14 +2,14 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:04:44
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 10:35:22
+ * @LastEditTime: 2018-11-23 17:07:55
  * @Description: 用于在光标区域添加一个 inline-block
  */
 
 import React from "react";
 import { EditorState, Modifier } from "draft-js";
 import Base from "../Base";
-import { getEndEntityKey, createNewEntity, findEntityRange } from "../../util";
+import { createNewEntity, findEntityRange } from "../../util";
 
 export default class BaseIB extends Base {
   constructor() {
@@ -20,25 +20,6 @@ export default class BaseIB extends Base {
       strategy: this.strategy.bind(this),
       component: this.component.bind(this)
     };
-  }
-
-  keyBindingFn(e) {
-    if (e.keyCode !== 8) return;
-    this.fire(editorState => {
-      // 获取 iframe 对应的 entity
-      const contentState = editorState.getCurrentContent();
-      const entityKey = getEndEntityKey(editorState, 1);
-
-      if (!entityKey) return editorState;
-      const entity = contentState.getEntity(entityKey);
-
-      if (!entity || entity.getType() !== this.entityType) return editorState;
-      contentState.replaceEntityData(entityKey, {});
-
-      return EditorState.set(editorState, {
-        currentContent: contentState
-      });
-    });
   }
 
   /* eslint-disable */
@@ -78,11 +59,10 @@ export default class BaseIB extends Base {
       contentState = Modifier.insertText(
         contentState,
         selection,
-        "IB",
+        "I",
         "",
         entityKey
       );
-      contentState = Modifier.insertText(contentState, selection, " ");
 
       return EditorState.push(
         newEditorState,
