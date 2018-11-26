@@ -12,7 +12,7 @@ import DraftEdiotr, {
   Undo,
   Redo,
   Iframe,
-  raw2html
+  serverRender
 } from "draft-x";
 import ToolBar from "./toolbar/ToolBar";
 import "draft-x/dist/draft.css";
@@ -85,7 +85,7 @@ class App extends Component {
 
   componentDidMount() {
     const json = `{"blocks":[{"key":"7e41j","text":" IB ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":1,"length":2,"key":0}],"data":{}}],"entityMap":{"0":{"type":"IFRAME","mutability":"IMMUTABLE","data":{"src":"http://blog.acohome.cn","width":80}}},"customStyleMap":{"bold":{"fontWeight":"bold"},"lineThrough":{"textDecoration":"line-through"},"underLine":{"textDecoration":"underline"},"italic":{"fontStyle":"italic"},"top":{"position":"relative","top":"-8px","display":"inline-flex","fontSize":"12px"},"bottom":{"position":"relative","bottom":"-8px","display":"inline-flex","fontSize":"12px"}}}`;
-    console.log(raw2html(json));
+    console.log(serverRender(json));
   }
 
   onChange(editorState) {
