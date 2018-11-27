@@ -1,4 +1,4 @@
-## toHtml
+## installl
 
 ```
 npm install darft-x
@@ -9,6 +9,10 @@ or
 ```
 yarn add draft-x
 ```
+
+## richEditor
+
+[demo](http://acohome.cn/demo/draft/)
 
 ```
 const draftX = require('draft-x');

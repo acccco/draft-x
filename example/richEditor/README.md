@@ -1,11 +1,22 @@
 ### step 1
 
-`npm install` or `yarn install`
+```
+~ cd ../../
+~ npm build
+~ npm link
+```
 
 ### step 2
 
-`npm link draft-x`
+```
+~ cd example/richEditor
+~ npm install
+```
 
 ### step 3
+
+`npm link @fastman/draft-plus`
+
+### step 4
 
 `npm run start`
