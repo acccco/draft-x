@@ -2,12 +2,12 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:03:10
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:14:29
+ * @LastEditTime: 2018-11-27 11:12:22
  * @Description: 基础的样式插件类，为选中区域添加样式，该类为基础类，使用时需继承该类
  */
 
-import { EditorState, Modifier } from "draft-js";
-import Base from "../Base";
+import { EditorState, Modifier } from 'draft-js';
+import Base from '../Base';
 
 export default class BaseIS extends Base {
   constructor(unique = true) {
@@ -17,8 +17,7 @@ export default class BaseIS extends Base {
   }
 
   getKeys(editorState) {
-    const styles = editorState.getCurrentInlineStyle();
-    return styles.filter(style => style in this.customStyleMap);
+    return editorState.getCurrentInlineStyle();
   }
 
   toggle(styleName) {
@@ -58,7 +57,7 @@ export default class BaseIS extends Base {
       return EditorState.push(
         editorState,
         nextContentState,
-        "change-inline-style"
+        'change-inline-style'
       );
     });
   }
