@@ -1,13 +1,13 @@
-import React from "react";
-import { Dropdown, Menu, Button, Icon, Divider } from "antd";
-import { LinkBtn, NormalBtn, CPBtn } from ".";
-import { getText, getInlineIcon, getBlockIcon } from "./getItemShow";
+import React from 'react';
+import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
+import { LinkBtn, NormalBtn, CPBtn } from '.';
+import { getText, getInlineIcon, getBlockIcon } from './getItemShow';
 
 export default props => {
   const { plugin, editorState, focus } = props;
   const blockKeys = [...plugin.baseBlock.getKeys(editorState)];
   const blockLabel =
-    blockKeys.length === 0 ? "普通文本" : getText(blockKeys[0]);
+    blockKeys.length === 0 ? '普通文本' : getText(blockKeys[0]);
   const blockMemu = (
     <Menu selectedKeys={blockKeys}>
       {plugin.baseBlock.map(key => (
@@ -26,9 +26,9 @@ export default props => {
   );
 
   const fontSizeKeys = [...plugin.fontSize.getKeys(editorState)];
-  const fontSizeLabel = fontSizeKeys.length === 0 ? "16" : fontSizeKeys[0];
+  const fontSizeLabel = fontSizeKeys.length === 0 ? '16' : fontSizeKeys[0];
   const fontSizeMenu = (
-    <Menu selectedKeys={fontSizeKeys.length === 0 ? ["16"] : fontSizeKeys}>
+    <Menu selectedKeys={fontSizeKeys.length === 0 ? ['16'] : fontSizeKeys}>
       {[12, 14, 16, 20, 22, 24, 26].map(size => (
         <Menu.Item
           key={size}
@@ -47,15 +47,6 @@ export default props => {
   return (
     <div>
       <div className="toolbar">
-        <NormalBtn
-          icon="undo"
-          action={() => {
-            plugin.iframe.toggle({
-              src: "http://www.baidu.com",
-              width: 80
-            });
-          }}
-        />
         <NormalBtn
           icon="undo"
           action={() => {
@@ -99,7 +90,7 @@ export default props => {
           }}
         >
           <Button>
-            {blockLabel || "普通文本"} <Icon type="down" />
+            {blockLabel || '普通文本'} <Icon type="down" />
           </Button>
         </Dropdown>
         <Divider type="vertical" />
@@ -154,8 +145,8 @@ export default props => {
           getKeys={() => plugin.bGColor.getKeys(editorState)}
         />
         <Divider type="vertical" />
-        {plugin.alignStyle.map(key => {
-          const keys = plugin.alignStyle.getKeys(editorState);
+        {plugin.align.map(key => {
+          const keys = plugin.align.getKeys(editorState);
           return (
             <NormalBtn
               key={key}
@@ -181,6 +172,18 @@ export default props => {
             />
           );
         })}
+        <NormalBtn
+          icon="menu-unfold"
+          action={() => {
+            plugin.baseBI.toggle('indent');
+          }}
+        />
+        <NormalBtn
+          icon="menu-fold"
+          action={() => {
+            plugin.baseBI.toggle('outdent');
+          }}
+        />
       </div>
     </div>
   );

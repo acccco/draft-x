@@ -2,26 +2,26 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:15:59
- * @Description: 基础的块级插件，用于修改块状表现
+ * @LastEditTime: 2018-11-27 15:31:46
+ * @Description: 实现对 block type 的控制以及呈现
  */
 
-import { RichUtils } from "draft-js";
-import Base from "../Base";
-import { getBlockType } from "../../util";
+import { RichUtils } from 'draft-js';
+import Base from '../Base';
+import { getBlockType } from '../../util';
 
 const BLOCK_TYPES = [
-  { label: "Normal", key: "unstyled" },
-  { label: "H1", key: "header-one" },
-  { label: "H2", key: "header-two" },
-  { label: "H3", key: "header-three" },
-  { label: "H4", key: "header-four" },
-  { label: "H5", key: "header-five" },
-  { label: "H6", key: "header-six" },
-  { label: "Blockquote", key: "blockquote" },
-  { label: "UL", key: "unordered-list-item" },
-  { label: "OL", key: "ordered-list-item" },
-  { label: "Code Block", key: "code-block" }
+  { label: 'Normal', key: 'unstyled' },
+  { label: 'H1', key: 'header-one' },
+  { label: 'H2', key: 'header-two' },
+  { label: 'H3', key: 'header-three' },
+  { label: 'H4', key: 'header-four' },
+  { label: 'H5', key: 'header-five' },
+  { label: 'H6', key: 'header-six' },
+  { label: 'Blockquote', key: 'blockquote' },
+  { label: 'UL', key: 'unordered-list-item' },
+  { label: 'OL', key: 'ordered-list-item' },
+  { label: 'Code Block', key: 'code-block' }
 ];
 
 export default class BaseBT extends Base {
@@ -33,9 +33,9 @@ export default class BaseBT extends Base {
   getKeys(editorState) {
     const key = getBlockType(editorState);
     const blockType = BLOCK_TYPES.filter(item => item.key === key)[0];
-    let blockLabel = blockType ? blockType.label : "";
+    let blockLabel = blockType ? blockType.label : '';
     if (this.blockTypes.indexOf(blockLabel) === -1) {
-      blockLabel = "";
+      blockLabel = '';
     }
     return new Set().add(blockLabel);
   }
@@ -43,10 +43,10 @@ export default class BaseBT extends Base {
   /* eslint-disable */
   blockStyleFn(block) {
     switch (block.getType()) {
-      case "blockquote":
-        return "RichEditor-blockquote";
+      case 'blockquote':
+        return 'RichEditor-blockquote';
       default:
-        return "";
+        return '';
     }
   }
   /* eslint-enable */

@@ -2,12 +2,11 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:02:21
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:27:51
+ * @LastEditTime: 2018-11-27 16:01:11
  * @Description: 对外暴露的 Draft 实例
  */
 
-import React from "react";
-import ReactDOMServer from "react-dom/server";
+import React from 'react';
 import {
   Editor,
   CompositeDecorator,
@@ -16,8 +15,8 @@ import {
   getDefaultKeyBinding,
   convertToRaw,
   convertFromRaw
-} from "draft-js";
-import "./RichEditor.scss";
+} from 'draft-js';
+import './RichEditor.scss';
 
 export default class DraftEditor extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ export default class DraftEditor extends React.Component {
 
     // init
     Object.keys(plugin).forEach(key => {
-      if ("init" in plugin[key]) {
+      if ('init' in plugin[key]) {
         plugin[key].init(this.getEditorState, this.applyChange);
       }
     });
@@ -55,10 +54,10 @@ export default class DraftEditor extends React.Component {
     const raw = JSON.parse(json);
     const contentState = convertFromRaw(raw);
     this.customStyleMap = raw.customStyleMap;
-    return EditorState.push(editorState, contentState, "adjust-depth");
+    return EditorState.push(editorState, contentState, 'adjust-depth');
   }
 
-  getHtml() {
+  getRaw() {
     const editorState = this.getEditorState();
     const raw = convertToRaw(editorState.getCurrentContent());
     raw.customStyleMap = this.getCustomStyleMap();
@@ -75,7 +74,7 @@ export default class DraftEditor extends React.Component {
     const { plugin } = this.props;
     const decorators = [];
     Object.keys(plugin).forEach(key => {
-      if ("decorator" in plugin[key]) {
+      if ('decorator' in plugin[key]) {
         decorators.push(plugin[key].decorator);
       }
     });
@@ -86,7 +85,7 @@ export default class DraftEditor extends React.Component {
     const { plugin } = this.props;
     let result = { ...this.customStyleMap } || {};
     Object.keys(plugin).forEach(key => {
-      if ("customStyleMap" in plugin[key]) {
+      if ('customStyleMap' in plugin[key]) {
         result = {
           ...result,
           ...plugin[key].customStyleMap
@@ -98,9 +97,9 @@ export default class DraftEditor extends React.Component {
 
   blockStyleFn(block) {
     const { plugin } = this.props;
-    let className = "";
+    let className = '';
     Object.keys(plugin).forEach(key => {
-      if ("blockStyleFn" in plugin[key]) {
+      if ('blockStyleFn' in plugin[key]) {
         className = `${plugin[key].blockStyleFn(block)} ${className}`;
       }
     });
@@ -111,7 +110,7 @@ export default class DraftEditor extends React.Component {
     const { plugin } = this.props;
     let returnValue;
     Object.keys(plugin).forEach(key => {
-      if ("blockRendererFn" in plugin[key]) {
+      if ('blockRendererFn' in plugin[key]) {
         returnValue = plugin[key].blockRendererFn(block) || returnValue;
       }
     });
@@ -121,7 +120,7 @@ export default class DraftEditor extends React.Component {
   keyBindingFn(e) {
     const { plugin } = this.props;
     Object.keys(plugin).forEach(key => {
-      if ("keyBindingFn" in plugin[key]) {
+      if ('keyBindingFn' in plugin[key]) {
         plugin[key].keyBindingFn(e);
       }
     });
@@ -143,7 +142,7 @@ export default class DraftEditor extends React.Component {
       editorState,
       onChange,
       className,
-      placeholder = "Tell a story..."
+      placeholder = 'Tell a story...'
     } = this.props;
     return (
       <div className={`RichEditor-editor ${className}`}>

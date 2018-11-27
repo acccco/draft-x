@@ -14,6 +14,8 @@ yarn add draft-x
 
 [demo](http://acohome.cn/demo/draft/)
 
+## toHtml
+
 ```
 const draftX = require('draft-x');
 /* json 为通过 draft#convertToRaw 出的数据 */

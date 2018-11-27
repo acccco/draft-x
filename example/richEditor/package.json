@@ -1,7 +1,6 @@
 {
   "name": "rich-editor",
   "version": "0.1.0",
-  "private": true,
   "homepage": "http://acohome.cn/demo/draft",
   "dependencies": {
     "antd": "^3.10.8",

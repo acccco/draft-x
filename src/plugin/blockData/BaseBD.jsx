@@ -2,8 +2,8 @@
  * @Author: Aco
  * @Date: 2018-11-06 09:21:53
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:16:14
- * @Description: description
+ * @LastEditTime: 2018-11-27 15:11:38
+ * @Description: 实现对 block data 的控制以及呈现
  */
 
 import Base from "../Base";

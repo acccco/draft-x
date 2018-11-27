@@ -3,12 +3,12 @@
  * @Date: 2018-11-06 09:21:53
  * @LastEditors: Please set LastEditors
  * @LastEditTime: 2018-11-14 17:18:01
- * @Description: description
+ * @Description: float
  */
 
-import BaseBS from "./BaseBS";
+import BaseBD from "./BaseBD";
 
-export default class AlignStyle extends BaseBS {
+export default class Float extends BaseBD {
   constructor() {
     super();
     this.name = "block-float";

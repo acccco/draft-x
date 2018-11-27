@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import { EditorState } from "draft-js";
+import React, { Component } from 'react';
+import { EditorState } from 'draft-js';
 import DraftEdiotr, {
   NormalStyle,
   RemoveStyle,
   CustomStyle,
   BaseBT,
-  AlignStyle,
+  Align,
   Link,
   RemoveTag,
   Image,
   Undo,
   Redo,
   Iframe,
-  serverRender
-} from "draft-x";
-import ToolBar from "./toolbar/ToolBar";
-import "draft-x/dist/draft.css";
-import "./app.scss";
+  BaseBI
+} from 'draft-x';
+import 'draft-x/dist/draft.css';
+import ToolBar from './toolbar/ToolBar';
+import './app.scss';
 
 class App extends Component {
   constructor() {
@@ -30,62 +30,58 @@ class App extends Component {
     this.plugin = {
       textUnUnipue: new NormalStyle({
         bold: {
-          fontWeight: "bold"
+          fontWeight: 'bold'
         },
         lineThrough: {
-          textDecoration: "line-through"
+          textDecoration: 'line-through'
         },
         underLine: {
-          textDecoration: "underline"
+          textDecoration: 'underline'
         },
         italic: {
-          fontStyle: "italic"
+          fontStyle: 'italic'
         }
       }),
       textUnipue: new NormalStyle(
         {
           top: {
-            position: "relative",
-            top: "-8px",
-            display: "inline-flex",
-            fontSize: "12px"
+            position: 'relative',
+            top: '-8px',
+            display: 'inline-flex',
+            fontSize: '12px'
           },
           bottom: {
-            position: "relative",
-            bottom: "-8px",
-            display: "inline-flex",
-            fontSize: "12px"
+            position: 'relative',
+            bottom: '-8px',
+            display: 'inline-flex',
+            fontSize: '12px'
           }
         },
         true
       ),
-      fontSize: new CustomStyle("fontSize"),
-      textColor: new CustomStyle("color"),
-      bGColor: new CustomStyle("backgroundColor"),
+      fontSize: new CustomStyle('fontSize'),
+      textColor: new CustomStyle('color'),
+      bGColor: new CustomStyle('backgroundColor'),
       removeStyle: new RemoveStyle(),
-      alignStyle: new AlignStyle(),
+      align: new Align(),
       link: new Link(),
       removeTag: new RemoveTag(),
       image: new Image(),
-      baseBlockList: new BaseBT(["UL", "OL"]),
+      baseBlockList: new BaseBT(['UL', 'OL']),
       baseBlock: new BaseBT([
-        "Normal",
-        "H1",
-        "H2",
-        "H3",
-        "H4",
-        "Blockquote",
-        "Code Block"
+        'Normal',
+        'H1',
+        'H2',
+        'H3',
+        'H4',
+        'Blockquote',
+        'Code Block'
       ]),
       undoPlugin: new Undo(),
       redoPlugin: new Redo(),
-      iframe: new Iframe()
+      iframe: new Iframe(),
+      baseBI: new BaseBI()
     };
-  }
-
-  componentDidMount() {
-    const json = `{"blocks":[{"key":"7e41j","text":" IB ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":1,"length":2,"key":0}],"data":{}}],"entityMap":{"0":{"type":"IFRAME","mutability":"IMMUTABLE","data":{"src":"http://blog.acohome.cn","width":80}}},"customStyleMap":{"bold":{"fontWeight":"bold"},"lineThrough":{"textDecoration":"line-through"},"underLine":{"textDecoration":"underline"},"italic":{"fontStyle":"italic"},"top":{"position":"relative","top":"-8px","display":"inline-flex","fontSize":"12px"},"bottom":{"position":"relative","bottom":"-8px","display":"inline-flex","fontSize":"12px"}}}`;
-    console.log(serverRender(json));
   }
 
   onChange(editorState) {
