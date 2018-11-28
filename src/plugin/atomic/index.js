@@ -6,7 +6,9 @@
  * @Description: 媒体插件
  */
 
-import BaseMedia from "./BaseAtomic";
-import Image from "./Image";
+import BaseMedia from './BaseAtomic';
+import Image from './Image';
+import Audio from './Audio';
+import Video from './Video';
 
-export { BaseMedia, Image };
+export { BaseMedia, Image, Audio, Video };

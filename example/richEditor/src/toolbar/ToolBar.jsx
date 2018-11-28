@@ -1,13 +1,12 @@
 import React from 'react';
 import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
-import { LinkBtn, NormalBtn, CPBtn } from '.';
+import { LinkBtn, NormalBtn, MediaBtn, CPBtn } from '.';
 import { getText, getInlineIcon, getBlockIcon } from './getItemShow';
 
 export default props => {
   const { plugin, editorState, focus } = props;
   const blockKeys = [...plugin.baseBlock.getKeys(editorState)];
-  const blockLabel =
-    blockKeys.length === 0 ? '普通文本' : getText(blockKeys[0]);
+  const blockLabel = blockKeys.length === 0 ? 'Normal' : getText(blockKeys[0]);
   const blockMemu = (
     <Menu selectedKeys={blockKeys}>
       {plugin.baseBlock.map(key => (
@@ -19,7 +18,7 @@ export default props => {
             plugin.baseBlock.toggle(key);
           }}
         >
-          {getText(key)}
+          {key}
         </Menu.Item>
       ))}
     </Menu>
@@ -28,7 +27,7 @@ export default props => {
   const fontSizeKeys = [...plugin.fontSize.getKeys(editorState)];
   const fontSizeLabel = fontSizeKeys.length === 0 ? '16' : fontSizeKeys[0];
   const fontSizeMenu = (
-    <Menu selectedKeys={fontSizeKeys.length === 0 ? ['16'] : fontSizeKeys}>
+    <Menu selectedKeys={[fontSizeLabel]}>
       {[12, 14, 16, 20, 22, 24, 26].map(size => (
         <Menu.Item
           key={size}
@@ -39,6 +38,49 @@ export default props => {
           }}
         >
           {`${size}px`}
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
+
+  const borderRKeys = [...plugin.borderRadius.getKeys(editorState)];
+  const borderRLabel = borderRKeys.length === 0 ? '0' : borderRKeys[0];
+  const borderRMemu = (
+    <Menu selectedKeys={[borderRLabel]}>
+      {[0, 2, 4, 6, 8].map(radius => (
+        <Menu.Item
+          key={radius}
+          value={radius}
+          onMouseDown={e => {
+            e.preventDefault();
+            plugin.borderRadius.toggle(radius);
+          }}
+        >
+          {`${radius}px`}
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
+
+  const borderKeys = [...plugin.border.getKeys(editorState)];
+  const borderMemu = (
+    <Menu selectedKeys={borderKeys.length === 0 ? ['none'] : borderKeys}>
+      {['none', '1px solid', '1px dashed', '1px dotted'].map(style => (
+        <Menu.Item
+          key={style}
+          value={style}
+          onMouseDown={e => {
+            e.preventDefault();
+            plugin.border.toggle(style);
+          }}
+        >
+          <div
+            style={{
+              margin: '10px 0',
+              overflow: 'auto',
+              borderTop: style
+            }}
+          />
         </Menu.Item>
       ))}
     </Menu>
@@ -60,16 +102,12 @@ export default props => {
           }}
         />
         <Divider type="vertical" />
-        <Dropdown
-          overlay={fontSizeMenu}
-          onMouseDown={e => {
-            e.preventDefault();
+        <NormalBtn
+          icon="delete"
+          action={() => {
+            plugin.removeStyle.toggle();
           }}
-        >
-          <Button>
-            {`${fontSizeLabel || 16}px`} <Icon type="down" />
-          </Button>
-        </Dropdown>
+        />
         <Divider type="vertical" />
         <LinkBtn
           focus={focus}
@@ -82,26 +120,21 @@ export default props => {
             plugin.removeTag.toggle();
           }}
         />
-        <Divider type="vertical" />
+      </div>
+      <div className="toolbar">
         <Dropdown
-          overlay={blockMemu}
+          overlay={fontSizeMenu}
           onMouseDown={e => {
             e.preventDefault();
           }}
         >
           <Button>
-            {blockLabel || '普通文本'} <Icon type="down" />
+            <Icon type="font-size" style={{ fontSize: 14 }} />
+            <span style={{ width: 46 }}>{`${fontSizeLabel || 16}px`}</span>
+            <Icon type="down" />
           </Button>
         </Dropdown>
         <Divider type="vertical" />
-        <NormalBtn
-          icon="delete"
-          action={() => {
-            plugin.removeStyle.toggle();
-          }}
-        />
-      </div>
-      <div className="toolbar">
         {plugin.textUnUnipue.map(key => {
           const keys = plugin.textUnUnipue.getKeys(editorState);
           return (
@@ -144,6 +177,20 @@ export default props => {
           toggle={color => plugin.bGColor.toggle(color)}
           getKeys={() => plugin.bGColor.getKeys(editorState)}
         />
+      </div>
+      <div className="toolbar">
+        <Dropdown
+          overlay={blockMemu}
+          onMouseDown={e => {
+            e.preventDefault();
+          }}
+        >
+          <Button>
+            <Icon type="block" style={{ fontSize: 14 }} />
+            <span style={{ width: 60 }}>{blockLabel}</span>
+            <Icon type="down" />
+          </Button>
+        </Dropdown>
         <Divider type="vertical" />
         {plugin.align.map(key => {
           const keys = plugin.align.getKeys(editorState);
@@ -183,6 +230,62 @@ export default props => {
           action={() => {
             plugin.baseBI.toggle('outdent');
           }}
+        />
+      </div>
+      <div className="toolbar">
+        <Dropdown
+          overlay={borderMemu}
+          onMouseDown={e => {
+            e.preventDefault();
+          }}
+        >
+          <Button>
+            <Icon type="border" style={{ fontSize: 14 }} />
+            <span>border</span>
+            <Icon type="down" />
+          </Button>
+        </Dropdown>
+        <Dropdown
+          overlay={borderRMemu}
+          onMouseDown={e => {
+            e.preventDefault();
+          }}
+        >
+          <Button>
+            <Icon type="radius-setting" style={{ fontSize: 14 }} />
+            <span style={{ width: 40 }}>{borderRLabel}px</span>
+            <Icon type="down" />
+          </Button>
+        </Dropdown>
+        <CPBtn
+          name="borderColor"
+          icon="edit"
+          title="请选择线框颜色"
+          toggle={color => plugin.borderColor.toggle(color)}
+          getKeys={() => plugin.borderColor.getKeys(editorState)}
+        />
+      </div>
+      <div className="toolbar">
+        <MediaBtn
+          type="image"
+          title="请输入图片资源地址"
+          focus={focus}
+          toggle={data => plugin.image.toggle(data)}
+          getEntity={() => plugin.image.getEntity(editorState)}
+        />
+        <MediaBtn
+          type="audio"
+          title="请输入音频资源地址"
+          focus={focus}
+          toggle={data => plugin.image.toggle(data)}
+          getEntity={() => plugin.image.getEntity(editorState)}
+        />
+        <MediaBtn
+          type="video"
+          title="请输入视频资源地址"
+          focus={focus}
+          toggle={data => plugin.image.toggle(data)}
+          getEntity={() => plugin.image.getEntity(editorState)}
         />
       </div>
     </div>

@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { Icon, Popover, Button } from "antd";
-import { Panel } from "rc-color-picker";
-import hexToRgba from "hex-to-rgba";
-import "rc-color-picker/assets/index.css";
-import "antd/dist/antd.css";
+import React, { Component } from 'react';
+import { Icon, Popover, Button } from 'antd';
+import { Panel } from 'rc-color-picker';
+import hexToRgba from 'hex-to-rgba';
+import 'rc-color-picker/assets/index.css';
+import 'antd/dist/antd.css';
 
 const defaultColor = [
   {
-    color: "#666666",
+    color: '#666666',
     alpha: 100
   },
   {
-    color: "#999999",
+    color: '#999999',
     alpha: 100
   },
   {
-    color: "#cccccc",
+    color: '#cccccc',
     alpha: 100
   }
 ];
@@ -24,7 +24,7 @@ export default class CPBtn extends Component {
   constructor() {
     super();
     this.color = {
-      color: "#ffffff",
+      color: '#ffffff',
       alpha: 100
     };
     this.state = {
@@ -84,8 +84,8 @@ export default class CPBtn extends Component {
   }
 
   render() {
-    const { visible, selectedColors, title } = this.state;
-    const { getKeys, icon } = this.props;
+    const { visible, selectedColors } = this.state;
+    const { getKeys, icon, title } = this.props;
     const colors = [...getKeys()];
     const text = <span>{title}</span>;
     const content = (
@@ -98,7 +98,6 @@ export default class CPBtn extends Component {
         <div className="color-selected">
           {selectedColors.map((color, index) => (
             <span
-              // eslint-disable-next-line
               key={`${color.color} ${index}`}
               style={{ background: hexToRgba(color.color, color.alpha / 100) }}
               onMouseDown={() => {
@@ -107,19 +106,19 @@ export default class CPBtn extends Component {
             />
           ))}
           <span
-            style={{ background: "#fff" }}
+            style={{ background: '#fff' }}
             onMouseDown={() => {
               this.changeColor({
-                color: "#ffffff",
+                color: '#ffffff',
                 alpha: 100
               });
             }}
           />
           <span
-            style={{ background: "#000" }}
+            style={{ background: '#000' }}
             onMouseDown={() => {
               this.changeColor({
-                color: "#000000",
+                color: '#000000',
                 alpha: 100
               });
             }}
@@ -163,7 +162,7 @@ export default class CPBtn extends Component {
           <Icon
             type={icon}
             style={{
-              filter: "drop-shadow(0 0 1px rgba(0, 0, 0, 0.65))",
+              filter: 'drop-shadow(0 0 1px rgba(0, 0, 0, 0.65))',
               color: colors[0]
             }}
           />

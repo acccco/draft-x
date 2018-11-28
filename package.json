@@ -1,6 +1,6 @@
 {
   "name": "draft-x",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "draft 富文本编辑器，基于插件开发",
   "main": "lib/index.js",
   "files": [
@@ -24,9 +24,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "draft-js": "^0.10.5",
-    "hex-to-rgba": "^1.0.2",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.3"
+    "react": "^16.6.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

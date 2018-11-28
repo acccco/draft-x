@@ -1,8 +1,8 @@
 /*
  * @Author: Aco
  * @Date: 2018-11-06 14:19:56
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2018-11-14 17:10:01
+ * @LastEditors: Aco
+ * @LastEditTime: 2018-11-28 12:41:51
  * @Description: description
  */
 
@@ -64,23 +64,23 @@ export function getMediaIcon(type) {
 export function getText(type) {
   switch (type) {
     case 'Normal':
-      return '普通文本';
+      return 'Normal';
     case 'H1':
-      return '标题一';
+      return 'H1';
     case 'H2':
-      return '标题二';
+      return 'H2';
     case 'H3':
-      return '标题三';
+      return 'H3';
     case 'H4':
-      return '标题四';
+      return 'H4';
     case 'H5':
-      return '标题五';
+      return 'H5';
     case 'H6':
-      return '标题六';
+      return 'H6';
     case 'Blockquote':
-      return '引用';
+      return 'Blockquote';
     case 'Code Block':
-      return '代码块';
+      return 'Code';
     default:
       return '';
   }

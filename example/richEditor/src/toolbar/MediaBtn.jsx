@@ -2,19 +2,19 @@
  * @Author: Aco
  * @Date: 2018-11-02 13:13:20
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-20 10:35:48
+ * @LastEditTime: 2018-11-28 13:32:15
  * @Description: 用于添加链接的按钮
  */
 
-import React from "react";
-import { Icon, Popover, Button } from "antd";
-import { getMediaIcon } from "./getItemShow";
+import React from 'react';
+import { Icon, Popover, Button } from 'antd';
+import { getMediaIcon } from './getItemShow';
 
-export default class Media extends React.Component {
+export default class MediaBtn extends React.Component {
   constructor() {
     super();
     this.state = {
-      src: "",
+      src: '',
       visible: false
     };
   }
@@ -35,7 +35,7 @@ export default class Media extends React.Component {
     const { src } = this.state;
     toggle({ src });
     this.setState({
-      src: "",
+      src: '',
       visible: false
     });
   }
@@ -43,21 +43,26 @@ export default class Media extends React.Component {
   unset(e) {
     e.preventDefault();
     this.setState({
-      src: "",
+      src: '',
       visible: false
     });
   }
 
   render() {
-    const { option } = this.props;
+    const { type, title } = this.props;
     const { visible, src } = this.state;
 
-    const text = <span>请输入链接地址</span>;
+    const text = <span>{title || '资源地址'}</span>;
 
     const content = (
       <div>
-        <input type="text" value={src} onChange={e => this.change(e)} />
-        <div>
+        <input
+          type="text"
+          className="input"
+          value={src}
+          onChange={e => this.change(e)}
+        />
+        <div className="pop-footer">
           <Button
             size="small"
             type="primary"
@@ -86,7 +91,7 @@ export default class Media extends React.Component {
             e.preventDefault();
           }}
         >
-          <Icon type={getMediaIcon(option.type)} />
+          <Icon type={getMediaIcon(type)} />
         </Button>
       </Popover>
     );
