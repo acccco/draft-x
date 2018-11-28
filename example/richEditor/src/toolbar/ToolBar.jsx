@@ -1,12 +1,89 @@
 import React from 'react';
 import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
+import {
+  NormalStyle,
+  RemoveStyle,
+  CustomStyle,
+  BaseBT,
+  Align,
+  Link,
+  RemoveTag,
+  Image,
+  Audio,
+  Video,
+  Undo,
+  Redo,
+  Iframe,
+  BaseBI
+} from 'draft-x';
 import { LinkBtn, NormalBtn, MediaBtn, CPBtn } from '.';
-import { getText, getInlineIcon, getBlockIcon } from './getItemShow';
+import { getInlineIcon, getBlockIcon } from './getItemShow';
+
+export const plugin = {
+  textUnUnipue: new NormalStyle({
+    bold: {
+      fontWeight: 'bold'
+    },
+    lineThrough: {
+      textDecoration: 'line-through'
+    },
+    underLine: {
+      textDecoration: 'underline'
+    },
+    italic: {
+      fontStyle: 'italic'
+    }
+  }),
+  textUnipue: new NormalStyle(
+    {
+      top: {
+        position: 'relative',
+        top: '-8px',
+        display: 'inline-flex',
+        fontSize: '12px'
+      },
+      bottom: {
+        position: 'relative',
+        bottom: '-8px',
+        display: 'inline-flex',
+        fontSize: '12px'
+      }
+    },
+    true
+  ),
+  fontSize: new CustomStyle('fontSize'),
+  textColor: new CustomStyle('color'),
+  bGColor: new CustomStyle('backgroundColor'),
+  borderRadius: new CustomStyle('borderRadius'),
+  border: new CustomStyle('border'),
+  borderColor: new CustomStyle('borderColor'),
+  removeStyle: new RemoveStyle(),
+  align: new Align(),
+  link: new Link(),
+  removeTag: new RemoveTag(),
+  image: new Image(),
+  audio: new Audio(),
+  video: new Video(),
+  baseBlockList: new BaseBT(['UL', 'OL']),
+  baseBlock: new BaseBT([
+    'Normal',
+    'H1',
+    'H2',
+    'H3',
+    'H4',
+    'Blockquote',
+    'Code Block'
+  ]),
+  undoPlugin: new Undo(),
+  redoPlugin: new Redo(),
+  iframe: new Iframe(),
+  baseBI: new BaseBI()
+};
 
 export default props => {
-  const { plugin, editorState, focus } = props;
+  const { editorState, focus } = props;
   const blockKeys = [...plugin.baseBlock.getKeys(editorState)];
-  const blockLabel = blockKeys.length === 0 ? 'Normal' : getText(blockKeys[0]);
+  const blockLabel = blockKeys.length === 0 ? 'Normal' : blockKeys[0];
   const blockMemu = (
     <Menu selectedKeys={blockKeys}>
       {plugin.baseBlock.map(key => (
@@ -269,23 +346,17 @@ export default props => {
         <MediaBtn
           type="image"
           title="请输入图片资源地址"
-          focus={focus}
           toggle={data => plugin.image.toggle(data)}
-          getEntity={() => plugin.image.getEntity(editorState)}
         />
         <MediaBtn
           type="audio"
           title="请输入音频资源地址"
-          focus={focus}
-          toggle={data => plugin.image.toggle(data)}
-          getEntity={() => plugin.image.getEntity(editorState)}
+          toggle={data => plugin.audio.toggle(data)}
         />
         <MediaBtn
           type="video"
           title="请输入视频资源地址"
-          focus={focus}
-          toggle={data => plugin.image.toggle(data)}
-          getEntity={() => plugin.image.getEntity(editorState)}
+          toggle={data => plugin.video.toggle(data)}
         />
       </div>
     </div>

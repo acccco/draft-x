@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-28 13:26:37
+ * @LastEditTime: 2018-11-28 14:02:19
  * @Description: 用于添加图片
  */
 
@@ -23,7 +23,7 @@ export default class Image extends BaseAtomic {
           className="RichEditor-video"
           src={props.data.src}
           style={{
-            whiteSpace: 'initial'
+            width: '100%'
           }}
         />
       </div>
