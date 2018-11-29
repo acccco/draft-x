@@ -2,12 +2,12 @@
  * @Author: Aco
  * @Date: 2018-11-05 14:21:34
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:15:33
+ * @LastEditTime: 2018-11-29 14:42:16
  * @Description: 用于匹配文本中的符合传入的正则表达式
  */
 
-import React from "react";
-import BaseDecoretor from "./BaseDecorator";
+import React from 'react';
+import BaseDecoretor from './BaseDecorator';
 
 function findWithRegex(regex, contentBlock, callback) {
   const text = contentBlock.getText();
@@ -22,7 +22,7 @@ function findWithRegex(regex, contentBlock, callback) {
 }
 
 const defaultStyle = {
-  color: "rgba(98, 177, 254, 1.0)"
+  color: 'rgba(98, 177, 254, 1.0)'
 };
 
 export default class Regex extends BaseDecoretor {
@@ -33,7 +33,9 @@ export default class Regex extends BaseDecoretor {
   }
 
   strategy(contentBlock, callback) {
-    findWithRegex(this.regex, contentBlock, callback);
+    if (this.regex) {
+      findWithRegex(this.regex, contentBlock, callback);
+    }
   }
 
   component(props) {

@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 11:14:55
+ * @LastEditTime: 2018-11-29 12:37:11
  * @Description: 实现对 block type 的控制以及呈现
  */
 
@@ -25,9 +25,6 @@ const BASE_BLOCK_TYPES = [
 ];
 
 export default class BaseBT extends Base {
-  /*
-    {type: className}
-  */
   constructor(blockTypes) {
     super();
     this.blockTypes = blockTypes;
