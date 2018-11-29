@@ -4,11 +4,8 @@
   "homepage": "http://acohome.cn/demo/draft",
   "dependencies": {
     "antd": "^3.10.8",
-    "draft-js": "^0.10.5",
     "hex-to-rgba": "^1.0.2",
     "rc-color-picker": "^1.2.6",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"
   },
   "scripts": {

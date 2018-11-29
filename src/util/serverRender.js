@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-23 09:04:32
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 15:32:06
+ * @LastEditTime: 2018-11-29 11:22:33
  * @Description: 用于获取 html
  */
 
@@ -13,20 +13,21 @@ import {
   Editor,
   CompositeDecorator
 } from 'draft-js';
-import { AlignStyle, FloatStyle, Link, Image, Iframe, Regex } from '..';
+import * as plugin from '../plugin';
 import ReactDOMServer from 'react-dom/server';
 
 class EditorStatic extends React.Component {
   constructor(props) {
     super();
-    this.plugin = {
-      floatStyle: new FloatStyle(),
-      alignStyle: new AlignStyle(),
-      link: new Link(),
-      image: new Image(),
-      iframe: new Iframe(),
-      regex: new Regex(/@[\w]+/g)
-    };
+
+    if (props.plugin) {
+      this.plugin = props.plugin;
+    } else {
+      this.plugin = {};
+      for (let key in plugin) {
+        this.plugin[key] = new plugin[key]();
+      }
+    }
 
     let { json } = props;
 
@@ -96,7 +97,7 @@ class EditorStatic extends React.Component {
   }
 }
 
-export default function raw2html(json) {
-  let dom = <EditorStatic json={json} />;
+export default function raw2html(json, plugin) {
+  let dom = <EditorStatic json={json} plugin={plugin} />;
   return ReactDOMServer.renderToStaticMarkup(dom);
 }

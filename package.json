@@ -24,7 +24,8 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "draft-js": "^0.10.5",
-    "react": "^16.6.1"
+    "react": "^16.6.1",
+    "react-dom": "^16.6.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",

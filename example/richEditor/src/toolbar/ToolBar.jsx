@@ -76,11 +76,9 @@ export const plugin = {
     'H5',
     'H6',
     'Blockquote',
-    'Code Block'
+    'Code'
   ]),
-  customBT: new CustomBT({
-    desc: 'Rich-desc'
-  }),
+  customBT: new CustomBT(['Rich-desc']),
   undoPlugin: new Undo(),
   redoPlugin: new Redo(),
   iframe: new Iframe(),
@@ -93,7 +91,6 @@ export default props => {
     ...plugin.baseBT.getKeys(editorState),
     ...plugin.customBT.getKeys(editorState)
   ];
-  console.log(blockKeys)
   const blockLabel = blockKeys.length === 0 ? 'Normal' : blockKeys[0];
   const blockMemu = (
     <Menu selectedKeys={blockKeys}>

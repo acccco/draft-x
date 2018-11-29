@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:02:21
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 16:01:11
+ * @LastEditTime: 2018-11-29 11:39:09
  * @Description: 对外暴露的 Draft 实例
  */
 
@@ -26,30 +26,24 @@ export default class DraftEditor extends React.Component {
     this.editor = React.createRef();
     this.customStyleMap = {};
 
-    // get/set editorState
-    // eslint-disable-next-line
     this.getEditorState = () => this.props.editorState;
     this.applyChange = state => {
       onChange(state);
     };
 
-    // init
     Object.keys(plugin).forEach(key => {
       if ('init' in plugin[key]) {
         plugin[key].init(this.getEditorState, this.applyChange);
       }
     });
 
-    // decorators
     const newDecorator = new CompositeDecorator([...this.getDecorator()]);
-    // end
 
     this.applyChange(
       EditorState.set(this.getEditorState(), { decorator: newDecorator })
     );
   }
 
-  /* eslint-disable */
   coverRaw(editorState, json) {
     const raw = JSON.parse(json);
     const contentState = convertFromRaw(raw);
@@ -64,11 +58,9 @@ export default class DraftEditor extends React.Component {
     return JSON.stringify(raw);
   }
 
-  /* eslint-disable */
   focus() {
     this.editor.current.focus();
   }
-  /* eslint-enable */
 
   getDecorator() {
     const { plugin } = this.props;

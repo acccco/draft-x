@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 10:21:51
+ * @LastEditTime: 2018-11-29 10:42:11
  * @Description: 实现对 block type 的控制以及呈现
  */
 
@@ -21,7 +21,7 @@ const BLOCK_TYPES = [
   { label: 'Blockquote', key: 'blockquote' },
   { label: 'UL', key: 'unordered-list-item' },
   { label: 'OL', key: 'ordered-list-item' },
-  { label: 'Code Block', key: 'code-block' }
+  { label: 'Code', key: 'code-block' }
 ];
 
 export default class BaseBT extends Base {
