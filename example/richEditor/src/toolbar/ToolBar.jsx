@@ -5,6 +5,7 @@ import {
   RemoveStyle,
   CustomStyle,
   BaseBT,
+  CustomBT,
   Align,
   Link,
   RemoveTag,
@@ -18,6 +19,7 @@ import {
 } from 'draft-x';
 import { LinkBtn, NormalBtn, MediaBtn, CPBtn } from '.';
 import { getInlineIcon, getBlockIcon } from './getItemShow';
+import './Rich.scss';
 
 export const plugin = {
   textUnUnipue: new NormalStyle({
@@ -65,15 +67,20 @@ export const plugin = {
   audio: new Audio(),
   video: new Video(),
   baseBlockList: new BaseBT(['UL', 'OL']),
-  baseBlock: new BaseBT([
+  baseBT: new BaseBT([
     'Normal',
     'H1',
     'H2',
     'H3',
     'H4',
+    'H5',
+    'H6',
     'Blockquote',
     'Code Block'
   ]),
+  customBT: new CustomBT({
+    desc: 'Rich-desc'
+  }),
   undoPlugin: new Undo(),
   redoPlugin: new Redo(),
   iframe: new Iframe(),
@@ -82,17 +89,33 @@ export const plugin = {
 
 export default props => {
   const { editorState, focus } = props;
-  const blockKeys = [...plugin.baseBlock.getKeys(editorState)];
+  const blockKeys = [
+    ...plugin.baseBT.getKeys(editorState),
+    ...plugin.customBT.getKeys(editorState)
+  ];
+  console.log(blockKeys)
   const blockLabel = blockKeys.length === 0 ? 'Normal' : blockKeys[0];
   const blockMemu = (
     <Menu selectedKeys={blockKeys}>
-      {plugin.baseBlock.map(key => (
+      {plugin.baseBT.map(key => (
         <Menu.Item
           key={key}
           value={key}
           onMouseDown={e => {
             e.preventDefault();
-            plugin.baseBlock.toggle(key);
+            plugin.baseBT.toggle(key);
+          }}
+        >
+          {key}
+        </Menu.Item>
+      ))}
+      {plugin.customBT.map(key => (
+        <Menu.Item
+          key={key}
+          value={key}
+          onMouseDown={e => {
+            e.preventDefault();
+            plugin.customBT.toggle(key);
           }}
         >
           {key}

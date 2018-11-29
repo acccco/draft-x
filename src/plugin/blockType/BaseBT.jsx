@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 15:31:46
+ * @LastEditTime: 2018-11-29 10:21:51
  * @Description: 实现对 block type 的控制以及呈现
  */
 
@@ -31,13 +31,14 @@ export default class BaseBT extends Base {
   }
 
   getKeys(editorState) {
+    const set = new Set();
     const key = getBlockType(editorState);
     const blockType = BLOCK_TYPES.filter(item => item.key === key)[0];
     let blockLabel = blockType ? blockType.label : '';
-    if (this.blockTypes.indexOf(blockLabel) === -1) {
-      blockLabel = '';
+    if (this.blockTypes.indexOf(blockLabel) !== -1) {
+      set.add(blockLabel);
     }
-    return new Set().add(blockLabel);
+    return set;
   }
 
   /* eslint-disable */

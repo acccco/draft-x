@@ -7,5 +7,6 @@
  */
 
 import BaseBT from './BaseBT';
+import CustomBT from './CustomBT';
 
-export { BaseBT };
+export { BaseBT, CustomBT };
