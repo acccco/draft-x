@@ -2,13 +2,12 @@
  * @Author: Aco
  * @Date: 2018-11-02 13:13:20
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-28 13:32:15
+ * @LastEditTime: 2018-11-29 17:07:24
  * @Description: 用于添加链接的按钮
  */
 
 import React from 'react';
 import { Icon, Popover, Button } from 'antd';
-import { getMediaIcon } from './getItemShow';
 
 export default class MediaBtn extends React.Component {
   constructor() {
@@ -31,9 +30,9 @@ export default class MediaBtn extends React.Component {
 
   confirm(e) {
     e.preventDefault();
-    const { toggle } = this.props;
+    const { action } = this.props;
     const { src } = this.state;
-    toggle({ src });
+    action({ src });
     this.setState({
       src: '',
       visible: false
@@ -49,7 +48,7 @@ export default class MediaBtn extends React.Component {
   }
 
   render() {
-    const { type, title } = this.props;
+    const { icon, title } = this.props;
     const { visible, src } = this.state;
 
     const text = <span>{title || '资源地址'}</span>;
@@ -64,13 +63,13 @@ export default class MediaBtn extends React.Component {
         />
         <div className="pop-footer">
           <Button
-            size="small"
+            size="default"
             type="primary"
             onMouseDown={e => this.confirm(e)}
           >
             确认
           </Button>
-          <Button size="small" type="danger" onMouseDown={e => this.unset(e)}>
+          <Button size="default" type="danger" onMouseDown={e => this.unset(e)}>
             取消
           </Button>
         </div>
@@ -91,7 +90,7 @@ export default class MediaBtn extends React.Component {
             e.preventDefault();
           }}
         >
-          <Icon type={getMediaIcon(type)} />
+          <Icon type={icon} />
         </Button>
       </Popover>
     );

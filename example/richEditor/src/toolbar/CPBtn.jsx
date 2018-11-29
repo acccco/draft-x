@@ -3,7 +3,6 @@ import { Icon, Popover, Button } from 'antd';
 import { Panel } from 'rc-color-picker';
 import hexToRgba from 'hex-to-rgba';
 import 'rc-color-picker/assets/index.css';
-import 'antd/dist/antd.css';
 
 const defaultColor = [
   {
@@ -75,9 +74,9 @@ export default class CPBtn extends Component {
   }
 
   changeColor(color) {
-    const { toggle } = this.props;
+    const { action } = this.props;
     const colorRgba = hexToRgba(color.color, color.alpha / 100);
-    toggle(colorRgba);
+    action(colorRgba);
     this.setState({
       visible: false
     });

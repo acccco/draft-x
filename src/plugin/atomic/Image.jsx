@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-28 13:26:53
+ * @LastEditTime: 2018-11-29 17:03:50
  * @Description: 用于添加图片
  */
 
@@ -15,13 +15,14 @@ export default class Image extends BaseAtomic {
     this.entityType = 'IMAGE';
   }
 
-  /* eslint-disable */
   component(props) {
+    const entity = props.contentState.getEntity(props.block.getEntityAt(0));
+    const { src } = entity.getData();
     return (
       <div className="RichEditor-float-wrap">
         <img
           className="RichEditor-img"
-          src={props.data.src}
+          src={src}
           style={{
             whiteSpace: 'initial'
           }}
@@ -29,5 +30,4 @@ export default class Image extends BaseAtomic {
       </div>
     );
   }
-  /* eslint-enable */
 }

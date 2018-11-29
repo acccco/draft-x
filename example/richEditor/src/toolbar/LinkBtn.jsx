@@ -2,19 +2,19 @@
  * @Author: Aco
  * @Date: 2018-11-02 13:13:20
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-20 13:35:18
+ * @LastEditTime: 2018-11-29 15:26:28
  * @Description: 用于添加链接的按钮
  */
 
-import React, { Component } from "react";
-import { Icon, Popover, Button } from "antd";
+import React, { Component } from 'react';
+import { Icon, Popover, Button } from 'antd';
 
 export default class Link extends Component {
   constructor() {
     super();
     this.link = React.createRef();
     this.state = {
-      href: "",
+      href: '',
       visible: false
     };
   }
@@ -31,11 +31,11 @@ export default class Link extends Component {
 
   confirm(e) {
     e.preventDefault();
-    const { toggle, focus } = this.props;
+    const { action, focus } = this.props;
     const { href } = this.state;
-    toggle({ href });
+    action({ href });
     this.setState({
-      href: "",
+      href: '',
       visible: false
     });
     setTimeout(() => {
@@ -46,7 +46,7 @@ export default class Link extends Component {
   unset(e) {
     e.preventDefault();
     this.setState({
-      href: "",
+      href: '',
       visible: false
     });
   }
@@ -55,7 +55,7 @@ export default class Link extends Component {
     e.preventDefault();
     const { getEntity } = this.props;
     const entity = getEntity();
-    if (entity && entity.type === "LINK") {
+    if (entity && entity.type === 'LINK') {
       this.setState({
         href: entity.getData().href
       });
@@ -67,7 +67,7 @@ export default class Link extends Component {
     const { href, visible } = this.state;
     const entity = getEntity();
     let hasLink = false;
-    if (entity && entity.type === "LINK") {
+    if (entity && entity.type === 'LINK') {
       hasLink = true;
     }
 
@@ -106,7 +106,7 @@ export default class Link extends Component {
         onVisibleChange={this.handleVisibleChange}
       >
         <Button
-          className={hasLink ? "active" : ""}
+          className={hasLink ? 'active' : ''}
           onMouseDown={e => {
             this.toggle(e);
           }}

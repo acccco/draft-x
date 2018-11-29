@@ -2,7 +2,7 @@
   "name": "draft-x",
   "version": "0.2.11",
   "description": "draft 富文本编辑器，基于插件开发",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "files": [
     "lib",
     "dist"

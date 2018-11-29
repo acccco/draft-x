@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
+import 'antd/dist/antd.css';
 import {
   NormalStyle,
   RemoveStyle,
@@ -86,7 +87,7 @@ export const plugin = {
 };
 
 export default props => {
-  const { editorState, focus } = props;
+  const { editorState, focus, logHtml } = props;
   const blockKeys = [
     ...plugin.baseBT.getKeys(editorState),
     ...plugin.customBT.getKeys(editorState)
@@ -208,7 +209,7 @@ export default props => {
         <Divider type="vertical" />
         <LinkBtn
           focus={focus}
-          toggle={data => plugin.link.toggle(data)}
+          action={data => plugin.link.toggle(data)}
           getEntity={() => plugin.link.getEntity(editorState)}
         />
         <NormalBtn
@@ -216,6 +217,22 @@ export default props => {
           action={() => {
             plugin.removeTag.toggle();
           }}
+        />
+        <Divider type="vertical" />
+        <MediaBtn
+          icon="picture"
+          title="请输入图片资源地址"
+          action={data => plugin.image.toggle(data)}
+        />
+        <MediaBtn
+          icon="sound"
+          title="请输入音频资源地址"
+          action={data => plugin.audio.toggle(data)}
+        />
+        <MediaBtn
+          icon="video-camera"
+          title="请输入视频资源地址"
+          action={data => plugin.video.toggle(data)}
         />
       </div>
       <div className="toolbar">
@@ -264,15 +281,48 @@ export default props => {
           name="color"
           icon="font-colors"
           title="请选择文字颜色"
-          toggle={color => plugin.textColor.toggle(color)}
+          action={color => plugin.textColor.toggle(color)}
           getKeys={() => plugin.textColor.getKeys(editorState)}
         />
         <CPBtn
           name="backgroundColor"
           icon="bg-colors"
           title="请选择文字背景颜色"
-          toggle={color => plugin.bGColor.toggle(color)}
+          action={color => plugin.bGColor.toggle(color)}
           getKeys={() => plugin.bGColor.getKeys(editorState)}
+        />
+      </div>
+      <div className="toolbar">
+        <Dropdown
+          overlay={borderMemu}
+          onMouseDown={e => {
+            e.preventDefault();
+          }}
+        >
+          <Button>
+            <Icon type="border" style={{ fontSize: 14 }} />
+            <span>border</span>
+            <Icon type="down" />
+          </Button>
+        </Dropdown>
+        <Dropdown
+          overlay={borderRMemu}
+          onMouseDown={e => {
+            e.preventDefault();
+          }}
+        >
+          <Button>
+            <Icon type="radius-setting" style={{ fontSize: 14 }} />
+            <span style={{ width: 40 }}>{borderRLabel}px</span>
+            <Icon type="down" />
+          </Button>
+        </Dropdown>
+        <CPBtn
+          name="borderColor"
+          icon="edit"
+          title="请选择线框颜色"
+          action={color => plugin.borderColor.toggle(color)}
+          getKeys={() => plugin.borderColor.getKeys(editorState)}
         />
       </div>
       <div className="toolbar">
@@ -330,54 +380,7 @@ export default props => {
         />
       </div>
       <div className="toolbar">
-        <Dropdown
-          overlay={borderMemu}
-          onMouseDown={e => {
-            e.preventDefault();
-          }}
-        >
-          <Button>
-            <Icon type="border" style={{ fontSize: 14 }} />
-            <span>border</span>
-            <Icon type="down" />
-          </Button>
-        </Dropdown>
-        <Dropdown
-          overlay={borderRMemu}
-          onMouseDown={e => {
-            e.preventDefault();
-          }}
-        >
-          <Button>
-            <Icon type="radius-setting" style={{ fontSize: 14 }} />
-            <span style={{ width: 40 }}>{borderRLabel}px</span>
-            <Icon type="down" />
-          </Button>
-        </Dropdown>
-        <CPBtn
-          name="borderColor"
-          icon="edit"
-          title="请选择线框颜色"
-          toggle={color => plugin.borderColor.toggle(color)}
-          getKeys={() => plugin.borderColor.getKeys(editorState)}
-        />
-      </div>
-      <div className="toolbar">
-        <MediaBtn
-          type="image"
-          title="请输入图片资源地址"
-          toggle={data => plugin.image.toggle(data)}
-        />
-        <MediaBtn
-          type="audio"
-          title="请输入音频资源地址"
-          toggle={data => plugin.audio.toggle(data)}
-        />
-        <MediaBtn
-          type="video"
-          title="请输入视频资源地址"
-          toggle={data => plugin.video.toggle(data)}
-        />
+        <Button onClick={() => logHtml()}>log html</Button>
       </div>
     </div>
   );

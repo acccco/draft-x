@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { EditorState } from 'draft-js';
-import DraftEdiotr from 'draft-x';
+import DraftEdiotr, { serverRender } from 'draft-x';
 import 'draft-x/dist/draft.css';
 import ToolBar, { plugin } from './toolbar/ToolBar';
 import './app.scss';
@@ -21,6 +21,12 @@ class App extends Component {
     }));
   }
 
+  logHtml() {
+    const raw = this.editor.current.getRaw();
+    const html = serverRender(raw);
+    console.log(html);
+  }
+
   render() {
     const {
       state: { editorState }
@@ -31,9 +37,8 @@ class App extends Component {
         <div className="toolbar-wrap">
           <ToolBar
             editorState={editorState}
-            focus={() => {
-              this.editor.current.focus();
-            }}
+            focus={() => this.editor.current.focus()}
+            logHtml={() => this.logHtml()}
           />
         </div>
 
