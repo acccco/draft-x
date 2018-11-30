@@ -225,6 +225,12 @@
 
 .RichEditor-float-wrap {
   padding: 4px;
+  position: relative;
+  .RichEditor-float-tool {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .RichEditor-img {
     cursor: pointer;
     width: 100%;

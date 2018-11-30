@@ -2,12 +2,12 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 17:02:33
+ * @LastEditTime: 2018-11-30 16:48:12
  * @Description: 基础的 media 插件，用于给编辑区域添加一个 media(img,audio,vedio)
  */
 
 import React from 'react';
-import { AtomicBlockUtils } from 'draft-js';
+import { AtomicBlockUtils, EditorState } from 'draft-js';
 import Base from '../Base';
 import { createNewEntity } from '../../util';
 
@@ -23,7 +23,6 @@ export default class BaseAtomicase extends Base {
   blockRendererFn(block) {
     if (block.getType() !== 'atomic') return undefined;
     const entityKey = block.getEntityAt(0);
-
     const entity = this.getEditorState()
       .getCurrentContent()
       .getEntity(entityKey);
@@ -35,16 +34,29 @@ export default class BaseAtomicase extends Base {
     }
   }
 
-  /* eslint-disable */
   blockStyleFn(block) {
     if (block.getType() !== 'atomic') return '';
     return 'RichEditor-media';
   }
 
+  keyBindingFn(e) {
+    if (e.keyCode !== 8) return;
+    this.fire(editorState => {
+      const content = editorState.getCurrentContent();
+      const startKey = editorState.getSelection().getStartKey();
+      const block = content.getBlockForKey(startKey);
+      if (block && block.getType() !== 'atomic') return editorState;
+      const blockMap = content.getBlockMap().delete(block.getKey());
+      const withoutAtomicBlock = content.merge({
+        blockMap
+      });
+      return EditorState.push(editorState, withoutAtomicBlock, 'remove-range');
+    });
+  }
+
   component() {
     return <span>插件实例需要 component 方法</span>;
   }
-  /* eslint-enable */
 
   toggle(data) {
     this.fire(editorState => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
+import { Dropdown, Menu, Button, Icon, Divider, Input } from 'antd';
 import 'antd/dist/antd.css';
 import {
   NormalStyle,
@@ -8,9 +8,9 @@ import {
   BaseBT,
   CustomBT,
   Align,
+  Float,
   Link,
   RemoveTag,
-  Image,
   Audio,
   Video,
   Undo,
@@ -18,9 +18,10 @@ import {
   Iframe,
   BaseBI
 } from 'draft-x';
-import { LinkBtn, NormalBtn, MediaBtn, CPBtn } from '.';
+import { LinkBtn, NormalBtn, MediaBtn, CPBtn, Atomic } from '.';
 import { getInlineIcon, getBlockIcon } from './getItemShow';
 import './Rich.scss';
+import Image from '../plugin/Image';
 
 export const plugin = {
   textUnUnipue: new NormalStyle({
@@ -62,6 +63,7 @@ export const plugin = {
   borderColor: new CustomStyle('borderColor'),
   removeStyle: new RemoveStyle(),
   align: new Align(),
+  float: new Float(),
   link: new Link(),
   removeTag: new RemoveTag(),
   image: new Image(),
@@ -347,7 +349,7 @@ export default props => {
               icon={getBlockIcon(key)}
               active={keys.has(key)}
               action={() => {
-                plugin.alignStyle.toggle(key);
+                plugin.align.toggle(key);
               }}
             />
           );
@@ -376,6 +378,32 @@ export default props => {
           icon="menu-fold"
           action={() => {
             plugin.baseBI.toggle('outdent');
+          }}
+        />
+      </div>
+      <div className="toolbar">
+        <NormalBtn
+          icon="pic-left"
+          action={() => {
+            plugin.float.toggle('float-left');
+          }}
+        />
+        <NormalBtn
+          icon="pic-center"
+          action={() => {
+            plugin.baseBI.toggle('outdent');
+          }}
+        />
+        <NormalBtn
+          icon="pic-right"
+          action={() => {
+            plugin.float.toggle('float-right');
+          }}
+        />
+        <Divider type="vertical" />
+        <Atomic
+          action={data => {
+            plugin.image.replaceData(data);
           }}
         />
       </div>

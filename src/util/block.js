@@ -2,19 +2,25 @@
  * @Author: Aco
  * @Date: 2018-11-20 09:40:12
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 15:40:02
+ * @LastEditTime: 2018-11-30 16:30:37
  * @Description: 关于 block 的一些操作
  */
 
 import { EditorState, Modifier } from 'draft-js';
 import { getSelectedBlocksMap } from './selection';
+import { Map } from 'immutable';
+
+export function getBlock(editorState) {
+  const selection = editorState.getSelection();
+  const block = editorState
+    .getCurrentContent()
+    .getBlockForKey(selection.getStartKey());
+  return block;
+}
 
 export function getBlockData(editorState) {
-  const selection = editorState.getSelection();
-  return editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getData();
+  const block = getBlock(editorState);
+  return block ? block.getData() : Map({});
 }
 
 export function setBlockData(editorState, data) {
@@ -27,11 +33,8 @@ export function setBlockData(editorState, data) {
 }
 
 export function getBlockType(editorState) {
-  const selection = editorState.getSelection();
-  return editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getType();
+  const block = getBlock(editorState);
+  return block ? block.getType() : '';
 }
 
 export function findEntityRange(

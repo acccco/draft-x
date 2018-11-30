@@ -2,14 +2,13 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 17:12:27
+ * @LastEditTime: 2018-11-30 17:11:23
  * @Description: 用于添加图片
  */
 
 import React from 'react';
+import { BaseAtomic, getStartEntityKey } from 'draft-x';
 import { EditorState, Modifier } from 'draft-js';
-import BaseAtomic from './BaseAtomic';
-import { getStartEntityKey } from '../../util';
 
 export default class Image extends BaseAtomic {
   constructor() {

@@ -2,12 +2,13 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:03:10
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 11:12:22
+ * @LastEditTime: 2018-11-30 15:52:31
  * @Description: 基础的样式插件类，为选中区域添加样式，该类为基础类，使用时需继承该类
  */
 
 import { EditorState, Modifier } from 'draft-js';
 import Base from '../Base';
+import { List } from 'immutable';
 
 export default class BaseIS extends Base {
   constructor(unique = true) {
@@ -17,6 +18,10 @@ export default class BaseIS extends Base {
   }
 
   getKeys(editorState) {
+    const selection = editorState.getSelection();
+    if (selection.isCollapsed()) {
+      return List([]);
+    }
     return editorState.getCurrentInlineStyle();
   }
 
