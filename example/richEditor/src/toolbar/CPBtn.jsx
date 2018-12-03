@@ -38,7 +38,7 @@ export default class CPBtn extends Component {
     if (name) {
       selectedColors = JSON.parse(localStorage.getItem(`CPBTN-${name}`));
     }
-    if (selectedColors && !selectedColors.length) {
+    if (!selectedColors || !selectedColors.length) {
       selectedColors = defaultColor;
     }
     this.setState({
