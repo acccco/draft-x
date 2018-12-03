@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:03:10
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 15:52:31
+ * @LastEditTime: 2018-12-03 10:12:51
  * @Description: 基础的样式插件类，为选中区域添加样式，该类为基础类，使用时需继承该类
  */
 
@@ -27,13 +27,12 @@ export default class BaseIS extends Base {
 
   toggle(styleName) {
     this.fire(editorState => {
-      // 获得当前选区
       const selection = editorState.getSelection();
       let nextContentState = editorState.getCurrentContent();
 
-      // 样式集是否仅仅引用一个样式
+      // 是否为单一样式集
       if (this.unique) {
-        // 移除当前类的样式集，避免重复赋同类型的值
+        // 移除集合内样式
         nextContentState = Object.keys(this.customStyleMap).reduce(
           (contentState, style) =>
             Modifier.removeInlineStyle(contentState, selection, style),
@@ -41,7 +40,7 @@ export default class BaseIS extends Base {
         );
       }
 
-      // 获得当前选取内的文本样式，用于判断是否有当前样式
+      // 获取当前应用的样式集
       const currentStyle = editorState.getCurrentInlineStyle();
       // 移除或添加当前选取的样式
       if (currentStyle.has(styleName)) {
@@ -58,7 +57,6 @@ export default class BaseIS extends Base {
         );
       }
 
-      // 应用变化
       return EditorState.push(
         editorState,
         nextContentState,

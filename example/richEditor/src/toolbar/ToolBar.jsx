@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Menu, Button, Icon, Divider, Input } from 'antd';
+import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
 import 'antd/dist/antd.css';
 import {
   NormalStyle,
@@ -11,17 +11,18 @@ import {
   Float,
   Link,
   RemoveTag,
+  Image,
   Audio,
   Video,
   Undo,
   Redo,
   Iframe,
-  BaseBI
+  BaseBI,
+  getBlock
 } from 'draft-x';
 import { LinkBtn, NormalBtn, MediaBtn, CPBtn, Atomic } from '.';
 import { getInlineIcon, getBlockIcon } from './getItemShow';
 import './Rich.scss';
-import Image from '../plugin/Image';
 
 export const plugin = {
   textUnUnipue: new NormalStyle({
@@ -90,13 +91,12 @@ export const plugin = {
 
 export default props => {
   const { editorState, focus, logHtml } = props;
-  const blockKeys = [
-    ...plugin.baseBT.getKeys(editorState),
-    ...plugin.customBT.getKeys(editorState)
-  ];
-  const blockLabel = blockKeys.length === 0 ? 'Normal' : blockKeys[0];
+  const blockLabel =
+    plugin.baseBT.getType(editorState) ||
+    plugin.customBT.getType(editorState) ||
+    'Normal';
   const blockMemu = (
-    <Menu selectedKeys={blockKeys}>
+    <Menu selectedKeys={[blockLabel]}>
       {plugin.baseBT.map(key => (
         <Menu.Item
           key={key}
@@ -186,6 +186,7 @@ export default props => {
     </Menu>
   );
 
+  const blockType = getBlock(editorState).getType();
   return (
     <div>
       <div className="toolbar">
@@ -342,12 +343,12 @@ export default props => {
         </Dropdown>
         <Divider type="vertical" />
         {plugin.align.map(key => {
-          const keys = plugin.align.getKeys(editorState);
+          const type = plugin.align.getType(editorState);
           return (
             <NormalBtn
               key={key}
               icon={getBlockIcon(key)}
-              active={keys.has(key)}
+              active={key === type}
               action={() => {
                 plugin.align.toggle(key);
               }}
@@ -356,12 +357,12 @@ export default props => {
         })}
         <Divider type="vertical" />
         {plugin.baseBlockList.map(key => {
-          const keys = plugin.baseBlockList.getKeys(editorState);
+          const type = plugin.baseBlockList.getType(editorState);
           return (
             <NormalBtn
               key={key}
               icon={getBlockIcon(key)}
-              active={keys.has(key)}
+              active={key === type}
               action={() => {
                 plugin.baseBlockList.toggle(key);
               }}
@@ -369,12 +370,14 @@ export default props => {
           );
         })}
         <NormalBtn
+          disabled={blockType.indexOf('list-item') === -1}
           icon="menu-unfold"
           action={() => {
             plugin.baseBI.toggle('indent');
           }}
         />
         <NormalBtn
+          disabled={blockType.indexOf('list-item') === -1}
           icon="menu-fold"
           action={() => {
             plugin.baseBI.toggle('outdent');
@@ -382,26 +385,23 @@ export default props => {
         />
       </div>
       <div className="toolbar">
-        <NormalBtn
-          icon="pic-left"
-          action={() => {
-            plugin.float.toggle('float-left');
-          }}
-        />
-        <NormalBtn
-          icon="pic-center"
-          action={() => {
-            plugin.baseBI.toggle('outdent');
-          }}
-        />
-        <NormalBtn
-          icon="pic-right"
-          action={() => {
-            plugin.float.toggle('float-right');
-          }}
-        />
+        {plugin.float.map(key => {
+          const type = plugin.float.getType(editorState);
+          return (
+            <NormalBtn
+              disabled={blockType !== 'atomic'}
+              key={key}
+              icon={getBlockIcon(key)}
+              active={key === type}
+              action={() => {
+                plugin.float.toggle(key);
+              }}
+            />
+          );
+        })}
         <Divider type="vertical" />
         <Atomic
+          disabled={blockType !== 'atomic'}
           action={data => {
             plugin.image.replaceData(data);
           }}

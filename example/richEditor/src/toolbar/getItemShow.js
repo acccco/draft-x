@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-06 14:19:56
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 15:42:27
+ * @LastEditTime: 2018-12-03 10:01:58
  * @Description: description
  */
 
@@ -41,6 +41,8 @@ export function getBlockIcon(type) {
       return 'icon-735bianjiqi_liangduanduiqi';
     case 'float-left':
       return 'pic-left';
+    case 'float-none':
+      return 'pic-center';
     case 'float-right':
       return 'pic-right';
     default:

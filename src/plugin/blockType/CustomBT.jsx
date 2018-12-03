@@ -2,14 +2,13 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 16:16:59
+ * @LastEditTime: 2018-12-03 10:26:55
  * @Description: 实现对 block type 的控制以及呈现
  */
 
 import { RichUtils } from 'draft-js';
 import Base from '../Base';
 import { getBlockType } from '../../util';
-import { List } from 'immutable';
 
 const BASE_BLOCK_TYPES = [
   'unstyled',
@@ -22,7 +21,8 @@ const BASE_BLOCK_TYPES = [
   'blockquote',
   'unordered-list-item',
   'ordered-list-item',
-  'code-block'
+  'code-block',
+  'atomic'
 ];
 
 export default class BaseBT extends Base {
@@ -31,13 +31,12 @@ export default class BaseBT extends Base {
     this.blockTypes = blockTypes;
   }
 
-  getKeys(editorState) {
-    let list = List();
+  getType(editorState) {
     const type = getBlockType(editorState);
     if (BASE_BLOCK_TYPES.indexOf(type) === -1) {
-      list = list.push(type);
+      return type;
     }
-    return list;
+    return '';
   }
 
   blockStyleFn(block) {

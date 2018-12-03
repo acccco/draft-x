@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 13:13:20
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 17:10:41
+ * @LastEditTime: 2018-12-03 09:28:51
  * @Description: 用于添加链接的按钮
  */
 
@@ -19,13 +19,14 @@ export default class MediaBtn extends React.Component {
 
   render() {
     const { atomicWidth } = this.state;
-    const { action } = this.props;
+    const { action, disabled } = this.props;
     return (
       <span>
-        <Button>
+        <Button disabled={disabled}>
           <Icon type="arrows-alt" />
         </Button>
         <Input
+          disabled={disabled}
           type="number"
           style={{
             width: 100
@@ -38,6 +39,7 @@ export default class MediaBtn extends React.Component {
           }}
         />
         <Button
+          disabled={disabled}
           onMouseDown={e => {
             console.log(atomicWidth);
             e.preventDefault();

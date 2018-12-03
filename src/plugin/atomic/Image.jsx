@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 17:12:27
+ * @LastEditTime: 2018-12-03 10:06:36
  * @Description: 用于添加图片
  */
 
@@ -23,12 +23,14 @@ export default class Image extends BaseAtomic {
     return (
       <div
         style={{
-          position: 'relative'
+          position: 'relative',
+          textAlign: 'center'
         }}
       >
         <div
           style={{
             position: 'absolute',
+            zIndex: 10,
             width: '100%',
             height: '100%'
           }}

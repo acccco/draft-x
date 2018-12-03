@@ -2,29 +2,28 @@
  * @Author: Aco
  * @Date: 2018-11-06 09:21:53
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 15:11:38
+ * @LastEditTime: 2018-12-03 09:38:35
  * @Description: 实现对 block data 的控制以及呈现
  */
 
-import Base from "../Base";
-import { getBlockData, setBlockData } from "../../util";
+import Base from '../Base';
+import { getBlockData, setBlockData } from '../../util';
 
 export default class BaseBS extends Base {
   constructor() {
     super();
-    this.name = "";
-    this.nameSpace = "";
+    this.name = '';
+    this.nameSpace = '';
     this.types = [];
   }
 
   blockStyleFn(block) {
-    const algin = block.getData().get(this.name) || "";
-    return algin ? `${this.nameSpace}-${algin}` : "";
+    const type = block.getData().get(this.name) || '';
+    return type ? `${this.nameSpace}-${type}` : '';
   }
 
-  getKeys(editorState) {
-    const key = getBlockData(editorState).get(this.name);
-    return new Set().add(key);
+  getType(editorState) {
+    return getBlockData(editorState).get(this.name);
   }
 
   map(create) {
@@ -36,7 +35,7 @@ export default class BaseBS extends Base {
       const blockData = getBlockData(editorState);
       let toggleType = type;
       if (blockData.get(this.name) === type) {
-        toggleType = "";
+        toggleType = '';
       }
       return setBlockData(editorState, { [this.name]: toggleType });
     });

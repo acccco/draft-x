@@ -2,14 +2,13 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 16:16:29
+ * @LastEditTime: 2018-12-03 10:18:04
  * @Description: 实现对 block type 的控制以及呈现
  */
 
 import { RichUtils } from 'draft-js';
 import Base from '../Base';
 import { getBlockType } from '../../util';
-import { List } from 'immutable';
 
 const BLOCK_TYPES = [
   { label: 'Normal', key: 'unstyled' },
@@ -31,15 +30,14 @@ export default class BaseBT extends Base {
     this.blockTypes = blockTypes;
   }
 
-  getKeys(editorState) {
-    let list = List([]);
+  getType(editorState) {
     const key = getBlockType(editorState);
     const blockType = BLOCK_TYPES.filter(item => item.key === key)[0];
     let blockLabel = blockType ? blockType.label : '';
     if (this.blockTypes.indexOf(blockLabel) !== -1) {
-      list = list.push(blockLabel);
+      return blockLabel;
     }
-    return list;
+    return '';
   }
 
   /* eslint-disable */

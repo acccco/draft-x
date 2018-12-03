@@ -2,23 +2,22 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:10:38
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:13:58
+ * @LastEditTime: 2018-12-03 10:17:07
  * @Description: 为选中区域添加 a 标签
  */
 
-import React from "react";
-import BaseIT from "./BaseIT";
+import React from 'react';
+import BaseIT from './BaseIT';
 
 export default class Link extends BaseIT {
   constructor() {
     super();
-    this.entityType = "LINK";
+    this.entityType = 'LINK';
   }
 
-  /* eslint-disable */
   keyDown(e, href) {
     if (e.metaKey || e.ctrlKey) {
-      window.open(href, "blank");
+      window.open(href, 'blank');
     }
   }
 

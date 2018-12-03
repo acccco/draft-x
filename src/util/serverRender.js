@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-23 09:04:32
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 11:22:33
+ * @LastEditTime: 2018-12-03 10:38:07
  * @Description: 用于获取 html
  */
 
@@ -43,11 +43,21 @@ class EditorStatic extends React.Component {
   }
 
   init(raw) {
+    const { plugin } = this;
     const newDecorator = new CompositeDecorator([...this.getDecorator()]);
     const contentState = convertFromRaw(raw);
     let editorState = EditorState.createEmpty();
     editorState = EditorState.push(editorState, contentState, 'adjust-depth');
     editorState = EditorState.set(editorState, { decorator: newDecorator });
+
+    Object.keys(plugin).forEach(key => {
+      if ('init' in plugin[key]) {
+        plugin[key].init(() => {
+          return editorState;
+        });
+      }
+    });
+
     return editorState;
   }
 
