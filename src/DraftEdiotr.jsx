@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:02:21
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 10:16:17
+ * @LastEditTime: 2018-12-07 11:54:58
  * @Description: 对外暴露的 Draft 实例
  */
 
@@ -16,7 +16,6 @@ import {
   convertToRaw,
   convertFromRaw
 } from 'draft-js';
-import './RichEditor.scss';
 
 export default class DraftEditor extends React.Component {
   constructor(props) {

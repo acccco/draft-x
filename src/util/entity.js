@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-20 09:40:12
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-30 16:41:13
+ * @LastEditTime: 2018-12-06 09:36:57
  * @Description: 关于 entity 的一些操作
  */
 
@@ -25,5 +25,3 @@ export function createNewEntity(editorState, option) {
     editorState: nextEditorState
   };
 }
-
-export const b = 1;

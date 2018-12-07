@@ -2,17 +2,18 @@
  * @Author: Aco
  * @Date: 2018-11-07 10:45:40
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 10:37:25
+ * @LastEditTime: 2018-12-06 09:30:58
  * @Description: 基础插件，所有插件必须继承此类
  */
 
 import { FireQueue } from '../util';
 
+const fireQueue = new FireQueue();
+
 export default class Base {
   constructor() {
-    this.fireQueue = new FireQueue();
-    this.fireQueue.setGetInit(() => this.getEditorState());
-    this.fireQueue.setCallBack(editorState => this.applyChange(editorState));
+    fireQueue.setGetInit(() => this.getEditorState());
+    fireQueue.setCallBack(editorState => this.applyChange(editorState));
   }
 
   getEditorState() {
