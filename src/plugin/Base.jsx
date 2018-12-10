@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-07 10:45:40
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-06 09:30:58
+ * @LastEditTime: 2018-12-10 13:07:45
  * @Description: 基础插件，所有插件必须继承此类
  */
 
@@ -28,7 +28,7 @@ export default class Base {
   }
 
   fire(fnc) {
-    this.fireQueue.add(fnc);
-    this.fireQueue.fire();
+    fireQueue.add(fnc);
+    fireQueue.fire();
   }
 }
