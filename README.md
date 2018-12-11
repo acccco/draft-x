@@ -17,10 +17,10 @@ yarn add draft-x
 ```js
 const draftX = require('draft-x');
 /* DraftEdiotr#getRaw => json */
-const html = draftX.json2html(json);
+const html = draftX.serverRender(json);
 ```
 
-**注:** json 可以通过 DraftEdiotr 实例下的 getRaw 获取，使用官方提供的 convertToRaw 会有部分数据的缺失。
+**注:** `json` 可以通过 `DraftEdiotr` 实例下的 `getRaw` 获取，使用官方提供的 `convertToRaw` 会有部分数据的缺失。
 
 [demo][3]
 
@@ -73,6 +73,8 @@ onChange(editorState) {
     ...
 }
 ```
+
+`draft-x` 不会要求使用者提供一个具体的 `option` 去构建一个富文本编辑器，所有的效果都插件化，因此 `draft-x` 也不会关注任何的 `ui` 实现，仅仅是在需要实现效果时调用一下相关插件的 `toggle` 方法即可，至于在哪里触发调用，插件并不关心，也无须关心。
 
 #### 插件的使用
 
@@ -280,6 +282,10 @@ Link#getEntity();                           // 获取实体，调用返回对�
 ```js
 RemoveTag#toggle();                         // 为选中区域取消链接
 ```
+
+#### 更多插件
+
+未完待续...
 
 [1]: http://acohome.cn/demo/draft/
 [2]: https://github.com/acccco/draft-x/tree/master/example/richEditor
