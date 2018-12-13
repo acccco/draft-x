@@ -16,7 +16,7 @@
     "url": "https://github.com/acccco/draft-x"
   },
   "scripts": {
-    "bulid": "cross-env BABEL_ENV=webpack webpack",
+    "build": "cross-env BABEL_ENV=webpack webpack",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib"
   },
   "author": "aco",
