@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.11.1
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn bulid
+      - run: yarn bulid:cjs
