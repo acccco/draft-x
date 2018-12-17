@@ -15,7 +15,7 @@
 
 ### step 3
 
-`npm link @fastman/draft-plus`
+`npm link draft-x`
 
 ### step 4
 
