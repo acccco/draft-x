@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:02:21
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-07 11:54:58
+ * @LastEditTime: 2018-12-18 15:32:01
  * @Description: 对外暴露的 Draft 实例
  */
 
@@ -44,7 +44,13 @@ export default class DraftEditor extends React.Component {
   }
 
   coverRaw(editorState, json) {
-    const raw = JSON.parse(json);
+    if (!json) {
+      return;
+    }
+    let raw = null;
+    if (typeof json === 'string') {
+      raw = JSON.parse(json);
+    }
     const contentState = convertFromRaw(raw);
     this.customStyleMap = raw.customStyleMap;
     return EditorState.push(editorState, contentState, 'adjust-depth');

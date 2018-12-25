@@ -2,63 +2,18 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 17:14:23
+ * @LastEditTime: 2018-12-25 16:53:12
  * @Description: 基础的 media 插件，用于给编辑区域添加一个 media(img,audio,vedio)
  */
 
-import React from 'react';
-import {
-  EditorState,
-  Modifier,
-  ContentBlock,
-  BlockMapBuilder,
-  genKey
-} from 'draft-js';
-import Base from '../Base';
-import { createNewEntity } from '../../util';
-import { List, Repeat } from 'immutable';
+import { EditorState, Modifier, ContentBlock, BlockMapBuilder } from 'draft-js';
+import { BasePlugin } from 'draft-x';
 
-export default class BaseAtomicase extends Base {
+export default class BaseAtomicase extends BasePlugin {
   constructor() {
     super();
     this.entityType = '';
-    this.mutability = 'IMMUTABLE';
-  }
-
-  blockRendererFn(block) {
-    console.log(block.getType());
-    if (block.getType() !== 'atomic') return;
-    const data = block.getData();
-    if (data.get('atomicType') === this.entityType) {
-      return {
-        component: this.component,
-        editable: this.mutability === 'MUTABLE'
-      };
-    }
-  }
-
-  blockStyleFn(block) {
-    if (block.getType() !== 'atomic') return '';
-    return 'RichEditor-media';
-  }
-
-  keyBindingFn(e) {
-    if (e.keyCode !== 8) return;
-    this.fire(editorState => {
-      const content = editorState.getCurrentContent();
-      const startKey = editorState.getSelection().getStartKey();
-      const block = content.getBlockForKey(startKey);
-      if (block && block.getType() !== 'atomic') return editorState;
-      const blockMap = content.getBlockMap().delete(block.getKey());
-      const withoutAtomicBlock = content.merge({
-        blockMap
-      });
-      return EditorState.push(editorState, withoutAtomicBlock, 'remove-range');
-    });
-  }
-
-  component() {
-    return <span>插件实例需要 component 方法</span>;
+    this.mutability = 'MUTABLE';
   }
 
   toggle(data) {
@@ -83,17 +38,17 @@ export default class BaseAtomicase extends Base {
       );
 
       let atomicBlockConfig = {
-        key: genKey(),
+        key: '1111',
         type: 'atomic',
         text: ' ',
         data: {
           atomicType: this.entityType,
-          ...data
+          src: 'http://bgcdn.acohome.cn/100965.jpg'
         }
       };
 
       let atomicDividerBlockConfig = {
-        key: genKey(),
+        key: '2222',
         type: 'unstyled'
       };
 

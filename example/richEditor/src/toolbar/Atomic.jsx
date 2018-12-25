@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 13:13:20
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 09:28:51
+ * @LastEditTime: 2018-12-25 09:54:01
  * @Description: 用于添加链接的按钮
  */
 
@@ -41,7 +41,6 @@ export default class MediaBtn extends React.Component {
         <Button
           disabled={disabled}
           onMouseDown={e => {
-            console.log(atomicWidth);
             e.preventDefault();
             action({
               width: Number(atomicWidth)

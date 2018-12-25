@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-20 15:02:09
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-06 10:12:58
+ * @LastEditTime: 2018-12-25 09:54:06
  * @Description: file content
  */
 
@@ -31,6 +31,7 @@ import {
 import { LinkBtn, NormalBtn, MediaBtn, CPBtn, Atomic } from '.';
 import { getInlineIcon, getBlockIcon } from './getItemShow';
 import './Rich.scss';
+import Test from '../plugin/Test';
 
 export const plugin = {
   textUnUnipue: new NormalStyle({
@@ -94,7 +95,8 @@ export const plugin = {
   undoPlugin: new Undo(),
   redoPlugin: new Redo(),
   iframe: new Iframe(),
-  baseBI: new BaseBI()
+  baseBI: new BaseBI(),
+  test: new Test()
 };
 
 export default props => {
@@ -417,6 +419,14 @@ export default props => {
       </div>
       <div className="toolbar">
         <Button onClick={() => logHtml()}>log html</Button>
+        <Button
+          onMouseDown={e => {
+            e.preventDefault();
+            plugin.test.toggle();
+          }}
+        >
+          test
+        </Button>
       </div>
     </div>
   );

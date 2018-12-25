@@ -2,11 +2,11 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:03:10
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 10:12:51
+ * @LastEditTime: 2018-12-25 10:14:53
  * @Description: 基础的样式插件类，为选中区域添加样式，该类为基础类，使用时需继承该类
  */
 
-import { EditorState, Modifier } from 'draft-js';
+import { EditorState, Modifier, RichUtils } from 'draft-js';
 import Base from '../Base';
 import { List } from 'immutable';
 
@@ -18,11 +18,11 @@ export default class BaseIS extends Base {
   }
 
   getKeys(editorState) {
-    const selection = editorState.getSelection();
-    if (selection.isCollapsed()) {
+    try {
+      return editorState.getCurrentInlineStyle();
+    } catch (e) {
       return List([]);
     }
-    return editorState.getCurrentInlineStyle();
   }
 
   toggle(styleName) {
@@ -33,35 +33,36 @@ export default class BaseIS extends Base {
       // 是否为单一样式集
       if (this.unique) {
         // 移除集合内样式
-        nextContentState = Object.keys(this.customStyleMap).reduce(
-          (contentState, style) =>
-            Modifier.removeInlineStyle(contentState, selection, style),
-          nextContentState
-        );
+        if (selection.isCollapsed()) {
+          let currentStyle = editorState.getCurrentInlineStyle();
+          currentStyle = Object.keys(this.customStyleMap).reduce((currentStyle, style) => {
+            if (currentStyle.has(style)) {
+              currentStyle = currentStyle.remove(style);
+            }
+            return currentStyle;
+          }, currentStyle);
+          editorState = EditorState.setInlineStyleOverride(
+            editorState,
+            currentStyle
+          );
+        } else {
+          nextContentState = Object.keys(this.customStyleMap).reduce(
+            (contentState, style) => {
+              return Modifier.removeInlineStyle(contentState, selection, style);
+            },
+            nextContentState
+          );
+        }
       }
 
-      // 获取当前应用的样式集
-      const currentStyle = editorState.getCurrentInlineStyle();
-      // 移除或添加当前选取的样式
-      if (currentStyle.has(styleName)) {
-        nextContentState = Modifier.removeInlineStyle(
-          nextContentState,
-          selection,
-          styleName
-        );
-      } else {
-        nextContentState = Modifier.applyInlineStyle(
-          nextContentState,
-          selection,
-          styleName
-        );
-      }
-
-      return EditorState.push(
+      editorState = EditorState.push(
         editorState,
         nextContentState,
         'change-inline-style'
       );
+
+      editorState = RichUtils.toggleInlineStyle(editorState, styleName);
+      return editorState;
     });
   }
 }
