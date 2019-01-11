@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 17:14:23
+ * @LastEditTime: 2019-01-04 14:21:30
  * @Description: 基础的 media 插件，用于给编辑区域添加一个 media(img,audio,vedio)
  */
 
@@ -26,7 +26,6 @@ export default class BaseAtomicase extends Base {
   }
 
   blockRendererFn(block) {
-    console.log(block.getType());
     if (block.getType() !== 'atomic') return;
     const data = block.getData();
     if (data.get('atomicType') === this.entityType) {
