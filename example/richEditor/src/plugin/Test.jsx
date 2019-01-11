@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-26 17:05:42
+ * @LastEditTime: 2019-01-11 15:35:21
  * @Description: 基础的 media 插件，用于给编辑区域添加一个 media(img,audio,vedio)
  */
 
@@ -18,8 +18,6 @@ export default class BaseAtomicase extends BasePlugin {
 
   toggle(data) {
     this.fire(editorState => {
-      const content = editorState.getCurrentContent();
-      console.log(content);
       return editorState;
     });
   }
