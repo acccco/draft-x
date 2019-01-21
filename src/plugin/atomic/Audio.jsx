@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 17:03:44
+ * @LastEditTime: 2019-01-21 10:23:19
  * @Description: 用于添加图片
  */
 
@@ -12,7 +12,7 @@ import BaseAtomic from './BaseAtomic';
 export default class Image extends BaseAtomic {
   constructor() {
     super();
-    this.entityType = 'AUDIO';
+    this.atomicType = 'AUDIO';
   }
 
   component(props) {

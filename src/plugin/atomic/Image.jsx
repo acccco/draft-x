@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-21 09:47:31
+ * @LastEditTime: 2019-01-21 13:28:18
  * @Description: 用于添加图片
  */
 
@@ -14,27 +14,24 @@ import { getStartEntityKey } from '../../util';
 export default class Image extends BaseAtomic {
   constructor() {
     super();
-    this.entityType = 'IMAGE';
-  }
-
-  keyDown(e, href) {
-    if (e.metaKey || e.ctrlKey) {
-      window.open(href, 'blank');
-    }
+    this.atomicType = 'IMAGE';
   }
 
   component(props) {
     const data = props.block.getData();
     const src = data.get('src');
     const width = data.get('width');
+
     const keyDown = (e, href) => {
+      if (!href) return;
       if (e.metaKey || e.ctrlKey) {
         href && window.open(href, 'blank');
       }
     };
+
     let image = (
       <img
-        className="RichEditor-img"
+        className="RichEditor-image"
         src={src}
         style={{
           whiteSpace: 'initial',
@@ -45,11 +42,17 @@ export default class Image extends BaseAtomic {
     );
     const entity = props.block.getEntityAt(0);
     let linkdata = {};
+
     if (entity) {
       const entity = props.contentState.getEntity(props.block.getEntityAt(0));
       linkdata = entity.getData();
-      image = <a href={linkdata.href}>{image}</a>;
+      image = (
+        <a href={linkdata.href} target="_blank">
+          {image}
+        </a>
+      );
     }
+
     return (
       <div
         style={{
@@ -63,11 +66,13 @@ export default class Image extends BaseAtomic {
             position: 'absolute',
             zIndex: 10,
             width: '100%',
-            height: '100%'
+            height: '100%',
+            top: 0,
+            left: 0
           }}
-        >
-          {image}
-        </div>
+          className="no-need"
+        />
+        {image}
       </div>
     );
   }

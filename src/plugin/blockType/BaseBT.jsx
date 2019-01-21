@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 10:18:04
+ * @LastEditTime: 2019-01-21 13:38:33
  * @Description: 实现对 block type 的控制以及呈现
  */
 
@@ -40,7 +40,6 @@ export default class BaseBT extends Base {
     return '';
   }
 
-  /* eslint-disable */
   blockStyleFn(block) {
     switch (block.getType()) {
       case 'blockquote':
@@ -49,7 +48,6 @@ export default class BaseBT extends Base {
         return '';
     }
   }
-  /* eslint-enable */
 
   map(create) {
     return this.blockTypes.map(create);
