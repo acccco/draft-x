@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 17:12:44
+ * @LastEditTime: 2019-01-21 09:47:31
  * @Description: 用于添加图片
  */
 
@@ -65,8 +65,9 @@ export default class Image extends BaseAtomic {
             width: '100%',
             height: '100%'
           }}
-        />
-        {image}
+        >
+          {image}
+        </div>
       </div>
     );
   }
