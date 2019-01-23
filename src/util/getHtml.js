@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-23 09:04:32
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-23 15:21:57
+ * @LastEditTime: 2019-01-23 15:25:29
  * @Description: 用于获取 html
  */
 
@@ -111,7 +111,7 @@ class EditorStatic extends React.Component {
   }
 }
 
-export default function serverRender(json, plugin) {
+export function serverRender(json, plugin) {
   toRender();
   let rc = <EditorStatic json={json} plugin={plugin} />;
   let dom = ReactDOMServer.renderToStaticMarkup(rc);
@@ -119,7 +119,7 @@ export default function serverRender(json, plugin) {
   return dom;
 }
 
-export default function toHtml(json, plugin){
+export function toHtml(json, plugin) {
   let rc = <EditorStatic json={json} plugin={plugin} />;
   return ReactDOMServer.renderToStaticMarkup(rc);
 }
