@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-20 09:40:12
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 14:58:02
+ * @LastEditTime: 2019-01-22 15:57:46
  * @Description: 关于选区的一些操作
  */
 
@@ -24,9 +24,7 @@ export function getStartEntityKey(editorState, deviation = 0) {
   return blockWithLinkAtBeginning.getEntityAt(startOffset + deviation);
 }
 
-export function getSelectedBlocksMap(editorState) {
-  const selectionState = editorState.getSelection();
-  const contentState = editorState.getCurrentContent();
+export function getSelectedBlocksMap(contentState, selectionState) {
   const startKey = selectionState.getStartKey();
   const endKey = selectionState.getEndKey();
   const blockMap = contentState.getBlockMap();

@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-23 09:04:32
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-14 09:38:29
+ * @LastEditTime: 2019-01-23 15:21:57
  * @Description: 用于获取 html
  */
 
@@ -15,6 +15,7 @@ import {
 } from 'draft-js';
 import * as plugin from '../plugin';
 import ReactDOMServer from 'react-dom/server';
+import { toRender, toEditor } from './env';
 
 class EditorStatic extends React.Component {
   constructor(props) {
@@ -74,13 +75,16 @@ class EditorStatic extends React.Component {
 
   blockStyleFn(block) {
     const { plugin } = this;
-    let className = '';
+    let classNames = new Set();
     Object.keys(plugin).forEach(key => {
       if ('blockStyleFn' in plugin[key]) {
-        className = `${plugin[key].blockStyleFn(block)} ${className}`;
+        let name = plugin[key].blockStyleFn(block);
+        if (name) {
+          classNames.add(name);
+        }
       }
     });
-    return className;
+    return Array.from(classNames).join(' ');
   }
 
   blockRendererFn(block) {
@@ -108,6 +112,14 @@ class EditorStatic extends React.Component {
 }
 
 export default function serverRender(json, plugin) {
-  let dom = <EditorStatic json={json} plugin={plugin} />;
-  return ReactDOMServer.renderToStaticMarkup(dom);
+  toRender();
+  let rc = <EditorStatic json={json} plugin={plugin} />;
+  let dom = ReactDOMServer.renderToStaticMarkup(rc);
+  toEditor();
+  return dom;
+}
+
+export default function toHtml(json, plugin){
+  let rc = <EditorStatic json={json} plugin={plugin} />;
+  return ReactDOMServer.renderToStaticMarkup(rc);
 }

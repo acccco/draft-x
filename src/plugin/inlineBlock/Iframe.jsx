@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-21 15:11:32
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 10:11:24
+ * @LastEditTime: 2019-01-22 15:40:43
  * @Description: 插入一个 iframe
  */
 import React from 'react';
@@ -20,7 +20,7 @@ export default class Iframe extends BaseIB {
     return (
       <span className="RichEditor-iframe" data-offset-key={props.offsetKey}>
         <span contentEditable={false}>&nbsp;</span>
-        <iframe title="test" src={data.src} style={{ width: data.width }} />
+        <iframe src={data.src} style={{ width: data.width }} />
         <span>&nbsp;</span>
       </span>
     );

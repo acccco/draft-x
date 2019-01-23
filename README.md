@@ -17,7 +17,7 @@ yarn add draft-x
 ```js
 const draftX = require('draft-x');
 /* DraftEdiotr#getRaw => json */
-const html = draftX.serverRender(json);
+const html = draftX.toHtml(json);
 ```
 
 **注:** `json` 可以通过 `DraftEdiotr` 实例下的 `getRaw` 获取，使用官方提供的 `convertToRaw` 会有部分数据的缺失。

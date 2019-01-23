@@ -2,14 +2,14 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-21 13:28:18
+ * @LastEditTime: 2019-01-23 15:18:06
  * @Description: 用于添加图片
  */
 
 import React from 'react';
 import { EditorState, Modifier } from 'draft-js';
 import BaseAtomic from './BaseAtomic';
-import { getStartEntityKey } from '../../util';
+import { getEnv, getStartEntityKey } from '../../util';
 
 export default class Image extends BaseAtomic {
   constructor() {
@@ -21,6 +21,8 @@ export default class Image extends BaseAtomic {
     const data = props.block.getData();
     const src = data.get('src');
     const width = data.get('width');
+    const oWidth = data.get('oWidth');
+    const oHeight = data.get('oHeight');
 
     const keyDown = (e, href) => {
       if (!href) return;
@@ -37,9 +39,25 @@ export default class Image extends BaseAtomic {
           whiteSpace: 'initial',
           width: width ? width : '100%'
         }}
-        alt="富文本图片"
       />
     );
+
+    if (getEnv() === 'render') {
+      image = (
+        <img
+          className="RichEditor-image"
+          data-src={src}
+          style={{
+            whiteSpace: 'initial',
+            width: width ? width : '100%'
+          }}
+          data-w={oWidth}
+          data-h={oHeight}
+          data-r={oWidth / oHeight}
+        />
+      );
+    }
+
     const entity = props.block.getEntityAt(0);
     let linkdata = {};
 

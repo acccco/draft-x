@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-20 15:02:09
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 09:54:06
+ * @LastEditTime: 2019-01-23 10:01:46
  * @Description: file content
  */
 
@@ -19,7 +19,7 @@ import {
   Float,
   Link,
   RemoveTag,
-  Image,
+  Image as XImage,
   Audio,
   Video,
   Undo,
@@ -76,7 +76,7 @@ export const plugin = {
   float: new Float(),
   link: new Link(),
   removeTag: new RemoveTag(),
-  image: new Image(),
+  image: new XImage(),
   audio: new Audio(),
   video: new Video(),
   baseBlockList: new BaseBT(['UL', 'OL']),
@@ -235,7 +235,20 @@ export default props => {
         <MediaBtn
           icon="picture"
           title="请输入图片资源地址"
-          action={data => plugin.image.toggle(data)}
+          action={data => {
+            const img = new Image();
+            img.src = data.src;
+            console.log(img)
+            img.onload = function loadImg() {
+              console.log(12312312)
+              plugin.image.toggle({
+                src: data.src,
+                oWidth: img.width,
+                oHeight: img.height
+              });
+            };
+            // plugin.image.toggle(data);
+          }}
         />
         <MediaBtn
           icon="sound"
