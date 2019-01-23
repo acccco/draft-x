@@ -1,6 +1,6 @@
 import FireQueue from './FireQueue';
 
-export { FireQueue, serverRender, toHtml };
+export { FireQueue };
 
 export * from './block';
 export * from './selection';
