@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-23 15:18:06
+ * @LastEditTime: 2019-01-23 15:51:50
  * @Description: 用于添加图片
  */
 
@@ -39,6 +39,9 @@ export default class Image extends BaseAtomic {
           whiteSpace: 'initial',
           width: width ? width : '100%'
         }}
+        data-w={oWidth}
+        data-h={oHeight}
+        data-r={oWidth / oHeight}
       />
     );
 
