@@ -7,8 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
-  entry: './src/RichEditor.scss',
+  entry: ['./src/index.js', './src/RichEditor.scss'],
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
