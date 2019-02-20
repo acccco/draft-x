@@ -5,4 +5,4 @@ export default DraftEdiotr;
 export * from './plugin';
 export * from './util';
 
-export const version = '0.2.21';
+export const version = '0.2.22';
