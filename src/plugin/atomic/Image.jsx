@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-23 15:51:50
+ * @LastEditTime: 2019-02-20 11:02:37
  * @Description: 用于添加图片
  */
 
@@ -67,11 +67,7 @@ export default class Image extends BaseAtomic {
     if (entity) {
       const entity = props.contentState.getEntity(props.block.getEntityAt(0));
       linkdata = entity.getData();
-      image = (
-        <a href={linkdata.href} target="_blank">
-          {image}
-        </a>
-      );
+      image = <a href={linkdata.href}>{image}</a>;
     }
 
     return (

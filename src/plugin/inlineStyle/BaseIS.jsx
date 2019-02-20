@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:03:10
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 10:14:53
+ * @LastEditTime: 2019-02-20 10:20:32
  * @Description: 基础的样式插件类，为选中区域添加样式，该类为基础类，使用时需继承该类
  */
 
@@ -35,12 +35,15 @@ export default class BaseIS extends Base {
         // 移除集合内样式
         if (selection.isCollapsed()) {
           let currentStyle = editorState.getCurrentInlineStyle();
-          currentStyle = Object.keys(this.customStyleMap).reduce((currentStyle, style) => {
-            if (currentStyle.has(style)) {
-              currentStyle = currentStyle.remove(style);
-            }
-            return currentStyle;
-          }, currentStyle);
+          currentStyle = Object.keys(this.customStyleMap).reduce(
+            (currentStyle, style) => {
+              if (currentStyle.has(style)) {
+                currentStyle = currentStyle.remove(style);
+              }
+              return currentStyle;
+            },
+            currentStyle
+          );
           editorState = EditorState.setInlineStyleOverride(
             editorState,
             currentStyle
@@ -48,6 +51,7 @@ export default class BaseIS extends Base {
         } else {
           nextContentState = Object.keys(this.customStyleMap).reduce(
             (contentState, style) => {
+              if (style === styleName) return contentState;
               return Modifier.removeInlineStyle(contentState, selection, style);
             },
             nextContentState
