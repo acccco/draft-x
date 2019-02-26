@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 15:04:44
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-11 15:35:49
+ * @LastEditTime: 2019-02-26 16:11:08
  * @Description: 基础的标签插件，用于为选中区域外添加一个标签，该类为基础类，使用时需继承该类
  */
 
@@ -35,7 +35,16 @@ export default class BaseIT extends Base {
   }
 
   getEntity(editorState) {
-    const selection = editorState.getSelection();
+    const content = editorState.getCurrentContent();
+    let selection = editorState.getSelection();
+    // 处理 atomic
+    let block = content.getBlockForKey(selection.getStartKey());
+    if (block.getType() === 'atomic') {
+      selection = selection.merge({
+        anchorOffset: 0,
+        focusOffset: 1
+      });
+    }
     if (selection.isCollapsed()) return;
     const contentState = editorState.getCurrentContent();
     const entityKey = getStartEntityKey(editorState);
