@@ -7,13 +7,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: ['./src/index.js', './src/RichEditor.scss'],
+  entry: ['./src/RichEditor.scss', './src/index.js'],
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'DraftX',
-    globalObject: 'this'
+    library: 'DraftX'
   },
   plugins: [
     new cleanWebpackPlugin(['./dist']),
