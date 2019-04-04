@@ -1,6 +1,6 @@
 {
   "name": "draft-x",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "description": "draft 富文本编辑器，基于插件开发",
   "main": "dist/index.js",
   "files": [
