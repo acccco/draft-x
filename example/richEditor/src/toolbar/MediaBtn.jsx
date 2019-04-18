@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-02 13:13:20
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 17:07:24
+ * @LastEditTime: 2019-04-18 11:07:43
  * @Description: 用于添加链接的按钮
  */
 
@@ -48,7 +48,7 @@ export default class MediaBtn extends React.Component {
   }
 
   render() {
-    const { icon, title } = this.props;
+    const { icon, title, placeholder } = this.props;
     const { visible, src } = this.state;
 
     const text = <span>{title || '资源地址'}</span>;
@@ -59,6 +59,7 @@ export default class MediaBtn extends React.Component {
           type="text"
           className="input"
           value={src}
+          placeholder={placeholder}
           onChange={e => this.change(e)}
         />
         <div className="pop-footer">

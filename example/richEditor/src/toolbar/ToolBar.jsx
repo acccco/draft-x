@@ -2,7 +2,7 @@
  * @Author: Aco
  * @Date: 2018-11-20 15:02:09
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-23 10:01:46
+ * @LastEditTime: 2019-04-18 11:06:05
  * @Description: file content
  */
 
@@ -235,29 +235,29 @@ export default props => {
         <MediaBtn
           icon="picture"
           title="请输入图片资源地址"
+          placeholder="media.png"
           action={data => {
             const img = new Image();
             img.src = data.src;
-            console.log(img)
             img.onload = function loadImg() {
-              console.log(12312312)
               plugin.image.toggle({
                 src: data.src,
                 oWidth: img.width,
                 oHeight: img.height
               });
             };
-            // plugin.image.toggle(data);
           }}
         />
         <MediaBtn
           icon="sound"
           title="请输入音频资源地址"
+          placeholder="media.mp3"
           action={data => plugin.audio.toggle(data)}
         />
         <MediaBtn
           icon="video-camera"
           title="请输入视频资源地址"
+          placeholder="media.mp4"
           action={data => plugin.video.toggle(data)}
         />
       </div>

@@ -72,6 +72,13 @@ export default class CPBtn extends Component {
       selectedColors
     });
   }
+  
+  unset = e => {
+    e.preventDefault();
+    this.setState({
+      visible: false,
+    });
+  };
 
   changeColor(color) {
     const { action } = this.props;
@@ -88,12 +95,7 @@ export default class CPBtn extends Component {
     const colors = [...getKeys()];
     const text = <span>{title}</span>;
     const content = (
-      <div
-        className="color-picker"
-        onMouseDown={e => {
-          e.preventDefault();
-        }}
-      >
+      <div className="color-picker">
         <div className="color-selected">
           {selectedColors.map((color, index) => (
             <span
@@ -124,8 +126,8 @@ export default class CPBtn extends Component {
           />
         </div>
         <Panel
-          enableAlpha={false}
-          defaultColor="#ffffff"
+          alpha={0}
+          color="#ffffff"
           onChange={color => this.changeHandler(color)}
           mode="RGB"
         />
