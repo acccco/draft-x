@@ -9,10 +9,10 @@
 import BaseIS from './BaseIS';
 
 export default class CustomStyle extends BaseIS {
-  constructor(cusetomKey, shortKey = cusetomKey) {
+  constructor(customKey, shortKey = customKey) {
     super();
     this.customStyleMap = {};
-    this.cusetomKey = cusetomKey;
+    this.cusetomKey = customKey;
     this.shortKey = shortKey;
   }
 

@@ -6,16 +6,34 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+
   .ant-divider-vertical {
     height: initial;
     margin: 6px 8px;
   }
+
   .ant-btn {
     border-radius: 2px;
     padding: 0 8px;
     margin: 3px;
     height: 30px;
     font-size: 14px;
+  }
+
+  .icon-wrap {
+    line-height: 30px;
+    padding-right: 4px;
+    font-size: 14px;
+    margin: 3px;
+    display: inline-block;
+  }
+
+  .ant-select {
+    width: 100px;
+    display: inline-block;
+    height: 30px;
+    vertical-align: middle;
+    margin: 3px;
   }
 }
 
@@ -36,6 +54,7 @@
 .editor-wrap {
   height: 80vh;
   padding: 10px;
+
   .RichEditor-editor {
     height: 100%;
   }
@@ -46,12 +65,15 @@
     border: none;
     box-shadow: none;
   }
+
   .rc-color-picker-panel-board-hsv {
     width: auto;
   }
+
   .color-selected {
     display: flex;
     justify-content: space-evenly;
+
     span {
       width: 20px;
       height: 20px;
@@ -72,8 +94,13 @@
 
 .pop-footer {
   text-align: center;
+
   .ant-btn {
     border-radius: 2px;
     margin: 0 8px;
   }
+}
+
+#parst {
+  outline: none;
 }

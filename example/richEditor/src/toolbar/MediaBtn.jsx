@@ -1,17 +1,9 @@
-/*
- * @Author: Aco
- * @Date: 2018-11-02 13:13:20
- * @LastEditors: Aco
- * @LastEditTime: 2019-04-18 11:07:43
- * @Description: 用于添加链接的按钮
- */
-
 import React from 'react';
-import { Icon, Popover, Button } from 'antd';
+import { Popover, Button } from 'antd';
 
 export default class MediaBtn extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       src: '',
       visible: false
@@ -91,7 +83,7 @@ export default class MediaBtn extends React.Component {
             e.preventDefault();
           }}
         >
-          <Icon type={icon} />
+          {icon}
         </Button>
       </Popover>
     );

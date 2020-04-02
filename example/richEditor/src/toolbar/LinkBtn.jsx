@@ -1,13 +1,6 @@
-/*
- * @Author: Aco
- * @Date: 2018-11-02 13:13:20
- * @LastEditors: Aco
- * @LastEditTime: 2018-11-29 15:26:28
- * @Description: 用于添加链接的按钮
- */
-
 import React, { Component } from 'react';
-import { Icon, Popover, Button } from 'antd';
+import { Popover, Button } from 'antd';
+import { LinkOutlined } from '@ant-design/icons';
 
 export default class Link extends Component {
   constructor() {
@@ -111,7 +104,7 @@ export default class Link extends Component {
             this.toggle(e);
           }}
         >
-          <Icon type="link" />
+          {<LinkOutlined />}
         </Button>
       </Popover>
     );

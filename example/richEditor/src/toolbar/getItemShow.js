@@ -1,51 +1,44 @@
-/*
- * @Author: Aco
- * @Date: 2018-11-06 14:19:56
- * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 10:01:58
- * @Description: description
- */
+import React from 'react';
+import {
+  BoldOutlined,
+  StrikethroughOutlined,
+  UnderlineOutlined,
+  ItalicOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+  BarsOutlined,
+  OrderedListOutlined,
+  AlignLeftOutlined,
+  AlignCenterOutlined,
+  AlignRightOutlined,
+  PicLeftOutlined,
+  PicCenterOutlined,
+  PicRightOutlined
+} from '@ant-design/icons';
 
 export function getInlineIcon(type) {
-  switch (type) {
-    case 'bold':
-      return 'bold';
-    case 'lineThrough':
-      return 'strikethrough';
-    case 'underLine':
-      return 'underline';
-    case 'italic':
-      return 'italic';
-    case 'top':
-      return 'up';
-    case 'bottom':
-      return 'down';
-    default:
-      return '';
-  }
+  let map = {
+    bold: <BoldOutlined />,
+    lineThrough: <StrikethroughOutlined />,
+    underLine: <UnderlineOutlined />,
+    italic: <ItalicOutlined />,
+    top: <ArrowUpOutlined />,
+    bottom: <ArrowDownOutlined />,
+  };
+  return map[type] || null;
 }
 
 export function getBlockIcon(type) {
-  switch (type) {
-    case 'UL':
-      return 'bars';
-    case 'OL':
-      return 'ordered-list';
-    case 'align-left':
-      return 'align-left';
-    case 'align-center':
-      return 'align-center';
-    case 'align-right':
-      return 'align-right';
-    case 'align-justify':
-      return 'icon-735bianjiqi_liangduanduiqi';
-    case 'float-left':
-      return 'pic-left';
-    case 'float-none':
-      return 'pic-center';
-    case 'float-right':
-      return 'pic-right';
-    default:
-      return '';
-  }
+  let map = {
+    ul: <BarsOutlined />,
+    ol: <OrderedListOutlined />,
+    'align-left': <AlignLeftOutlined />,
+    'align-center': <AlignCenterOutlined />,
+    'align-right': <AlignRightOutlined />,
+    'align-justify': <AlignCenterOutlined />,
+    'float-left': <PicLeftOutlined />,
+    'float-none': <PicCenterOutlined />,
+    'float-right': <PicRightOutlined />,
+  };
+  return map[type.toLowerCase()] || null;
 }

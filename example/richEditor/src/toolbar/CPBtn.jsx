@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Popover, Button } from 'antd';
+import { Popover, Button } from 'antd';
 import { Panel } from 'rc-color-picker';
 import hexToRgba from 'hex-to-rgba';
 import 'rc-color-picker/assets/index.css';
@@ -72,7 +72,7 @@ export default class CPBtn extends Component {
       selectedColors
     });
   }
-  
+
   unset = e => {
     e.preventDefault();
     this.setState({
@@ -126,7 +126,7 @@ export default class CPBtn extends Component {
           />
         </div>
         <Panel
-          alpha={0}
+          alpha={100}
           color="#ffffff"
           onChange={color => this.changeHandler(color)}
           mode="RGB"
@@ -160,13 +160,14 @@ export default class CPBtn extends Component {
             e.preventDefault();
           }}
         >
-          <Icon
-            type={icon}
-            style={{
-              filter: 'drop-shadow(0 0 1px rgba(0, 0, 0, 0.65))',
-              color: colors[0]
-            }}
-          />
+          {/*<Icon*/}
+          {/*  type={icon}*/}
+          {/*  style={{*/}
+          {/*    filter: 'drop-shadow(0 0 1px rgba(0, 0, 0, 0.65))',*/}
+          {/*    color: colors[0]*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {icon}
         </Button>
       </Popover>
     );

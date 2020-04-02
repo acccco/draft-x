@@ -1,13 +1,6 @@
-/*
- * @Author: Aco
- * @Date: 2018-11-02 13:13:20
- * @LastEditors: Aco
- * @LastEditTime: 2018-12-25 09:54:01
- * @Description: 用于添加链接的按钮
- */
-
 import React from 'react';
-import { Input, Button, Icon } from 'antd';
+import { Input, Button } from 'antd';
+import { ArrowsAltOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default class MediaBtn extends React.Component {
   constructor() {
@@ -23,7 +16,7 @@ export default class MediaBtn extends React.Component {
     return (
       <span>
         <Button disabled={disabled}>
-          <Icon type="arrows-alt" />
+          <ArrowsAltOutlined />
         </Button>
         <Input
           disabled={disabled}
@@ -47,7 +40,7 @@ export default class MediaBtn extends React.Component {
             });
           }}
         >
-          <Icon type="check" />
+          {<CheckOutlined />}
         </Button>
       </span>
     );

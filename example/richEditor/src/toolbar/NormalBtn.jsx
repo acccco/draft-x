@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 
 export default function NormalBtn(props) {
   const { icon, active, action, disabled } = props;
@@ -12,7 +12,7 @@ export default function NormalBtn(props) {
         action();
       }}
     >
-      <Icon type={icon} />
+      {icon}
     </Button>
   );
 }

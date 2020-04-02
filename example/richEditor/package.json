@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "homepage": "http://acohome.cn/demo/draft",
   "dependencies": {
-    "antd": "^3.10.8",
-    "hex-to-rgba": "^1.0.2",
+    "antd": "^4.1.0",
+    "hex-to-rgba": "^2.0.1",
     "rc-color-picker": "^1.2.6",
-    "react-scripts": "2.1.1"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

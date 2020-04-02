@@ -1,14 +1,25 @@
-/*
- * @Author: Aco
- * @Date: 2018-11-20 15:02:09
- * @LastEditors: Aco
- * @LastEditTime: 2019-04-18 11:06:05
- * @Description: file content
- */
+import 'antd/dist/antd.css';
+import './Rich.scss';
 
 import React from 'react';
-import { Dropdown, Menu, Button, Icon, Divider } from 'antd';
-import 'antd/dist/antd.css';
+import { Button, Divider, Select } from 'antd';
+import {
+  FontSizeOutlined,
+  UndoOutlined,
+  RedoOutlined,
+  DeleteOutlined,
+  DisconnectOutlined,
+  PictureOutlined,
+  SoundOutlined,
+  VideoCameraAddOutlined,
+  FontColorsOutlined,
+  BgColorsOutlined,
+  EditOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  BorderOuterOutlined,
+  RadiusUpleftOutlined
+} from '@ant-design/icons';
 import {
   NormalStyle,
   RemoveStyle,
@@ -30,8 +41,9 @@ import {
 } from 'draft-x';
 import { LinkBtn, NormalBtn, MediaBtn, CPBtn, Atomic } from '.';
 import { getInlineIcon, getBlockIcon } from './getItemShow';
-import './Rich.scss';
 import Test from '../plugin/Test';
+
+const { Option } = Select;
 
 export const plugin = {
   textUnUnipue: new NormalStyle({
@@ -101,14 +113,16 @@ export const plugin = {
 
 export default props => {
   const { editorState, focus, logHtml } = props;
+
   const blockLabel =
     plugin.baseBT.getType(editorState) ||
     plugin.customBT.getType(editorState) ||
     'Normal';
-  const blockMemu = (
-    <Menu selectedKeys={[blockLabel]}>
+
+  const blockSelect = (
+    <Select value={blockLabel}>
       {plugin.baseBT.map(key => (
-        <Menu.Item
+        <Option
           key={key}
           value={key}
           onMouseDown={e => {
@@ -117,10 +131,10 @@ export default props => {
           }}
         >
           {key}
-        </Menu.Item>
+        </Option>
       ))}
       {plugin.customBT.map(key => (
-        <Menu.Item
+        <Option
           key={key}
           value={key}
           onMouseDown={e => {
@@ -129,92 +143,83 @@ export default props => {
           }}
         >
           {key}
-        </Menu.Item>
+        </Option>
       ))}
-    </Menu>
+    </Select>
   );
 
-  const fontSizeKeys = [...plugin.fontSize.getKeys(editorState)];
-  const fontSizeLabel = fontSizeKeys.length === 0 ? '16' : fontSizeKeys[0];
-  const fontSizeMenu = (
-    <Menu selectedKeys={[fontSizeLabel]}>
+  const fontSizeValue = [...plugin.fontSize.getKeys(editorState)][0] || '16';
+  const fontSizeSelect = (
+    <Select value={fontSizeValue + 'px'} onChange={value => {
+      plugin.fontSize.toggle(value);
+    }}>
       {[12, 14, 16, 20, 22, 24, 26].map(size => (
-        <Menu.Item
-          key={size}
-          value={size}
-          onMouseDown={e => {
-            e.preventDefault();
-            plugin.fontSize.toggle(size);
-          }}
-        >
+        <Option key={size} value={size}>
           {`${size}px`}
-        </Menu.Item>
+        </Option>
       ))}
-    </Menu>
+    </Select>
   );
 
-  const borderRKeys = [...plugin.borderRadius.getKeys(editorState)];
-  const borderRLabel = borderRKeys.length === 0 ? '0' : borderRKeys[0];
-  const borderRMemu = (
-    <Menu selectedKeys={[borderRLabel]}>
-      {[0, 2, 4, 6, 8].map(radius => (
-        <Menu.Item
-          key={radius}
-          value={radius}
-          onMouseDown={e => {
-            e.preventDefault();
-            plugin.borderRadius.toggle(radius);
-          }}
-        >
-          {`${radius}px`}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-
-  const borderKeys = [...plugin.border.getKeys(editorState)];
-  const borderMemu = (
-    <Menu selectedKeys={borderKeys.length === 0 ? ['none'] : borderKeys}>
+  const borderValue = [...plugin.border.getKeys(editorState)][0] || 'none';
+  const borderValueDom = <div
+    style={{
+      margin: '15px 0',
+      overflow: 'auto',
+      borderTop: borderValue
+    }}
+  />;
+  const borderSelect = (
+    <Select value={borderValueDom} onChange={value => {
+      plugin.border.toggle(value);
+    }}>
       {['none', '1px solid', '1px dashed', '1px dotted'].map(style => (
-        <Menu.Item
-          key={style}
-          value={style}
-          onMouseDown={e => {
-            e.preventDefault();
-            plugin.border.toggle(style);
-          }}
-        >
+        <Option key={style} value={style}>
           <div
             style={{
-              margin: '10px 0',
+              margin: '15px 0',
               overflow: 'auto',
               borderTop: style
             }}
           />
-        </Menu.Item>
+        </Option>
       ))}
-    </Menu>
+    </Select>
+  );
+
+  const borderRValue = [...plugin.borderRadius.getKeys(editorState)][0] || '0';
+  const borderRSelect = (
+    <Select value={borderRValue + 'px'} onChange={value => {
+      plugin.borderRadius.toggle(value);
+    }}>
+      {[0, 2, 4, 6, 8].map(radius => (
+        <Option key={radius} value={radius}>
+          {`${radius}px`}
+        </Option>
+      ))}
+    </Select>
   );
 
   const blockType = getBlock(editorState).getType();
+
   return (
     <div>
       <div className="toolbar">
         <NormalBtn
-          icon="undo"
+          icon={<UndoOutlined />}
           action={() => {
             plugin.undoPlugin.toggle();
           }}
         />
         <NormalBtn
-          icon="redo"
+          icon={<RedoOutlined />}
           action={() => {
             plugin.redoPlugin.toggle();
           }}
         />
         <Divider type="vertical" />
         <NormalBtn
-          icon="delete"
+          icon={<DeleteOutlined />}
           action={() => {
             plugin.removeStyle.toggle();
           }}
@@ -226,14 +231,14 @@ export default props => {
           getEntity={() => plugin.link.getEntity(editorState)}
         />
         <NormalBtn
-          icon="disconnect"
+          icon={<DisconnectOutlined />}
           action={() => {
             plugin.removeTag.toggle();
           }}
         />
         <Divider type="vertical" />
         <MediaBtn
-          icon="picture"
+          icon={<PictureOutlined />}
           title="请输入图片资源地址"
           placeholder="media.png"
           action={data => {
@@ -249,31 +254,21 @@ export default props => {
           }}
         />
         <MediaBtn
-          icon="sound"
+          icon={<SoundOutlined />}
           title="请输入音频资源地址"
           placeholder="media.mp3"
           action={data => plugin.audio.toggle(data)}
         />
         <MediaBtn
-          icon="video-camera"
+          icon={<VideoCameraAddOutlined />}
           title="请输入视频资源地址"
           placeholder="media.mp4"
           action={data => plugin.video.toggle(data)}
         />
       </div>
       <div className="toolbar">
-        <Dropdown
-          overlay={fontSizeMenu}
-          onMouseDown={e => {
-            e.preventDefault();
-          }}
-        >
-          <Button>
-            <Icon type="font-size" style={{ fontSize: 14 }} />
-            <span style={{ width: 46 }}>{`${fontSizeLabel || 16}px`}</span>
-            <Icon type="down" />
-          </Button>
-        </Dropdown>
+        <span className='icon-wrap'>字号</span>
+        {fontSizeSelect}
         <Divider type="vertical" />
         {plugin.textUnUnipue.map(key => {
           const keys = plugin.textUnUnipue.getKeys(editorState);
@@ -305,65 +300,36 @@ export default props => {
         <Divider type="vertical" />
         <CPBtn
           name="color"
-          icon="font-colors"
+          icon={<FontColorsOutlined />}
           title="请选择文字颜色"
           action={color => plugin.textColor.toggle(color)}
           getKeys={() => plugin.textColor.getKeys(editorState)}
         />
         <CPBtn
           name="backgroundColor"
-          icon="bg-colors"
+          icon={<BgColorsOutlined />}
           title="请选择文字背景颜色"
           action={color => plugin.bGColor.toggle(color)}
           getKeys={() => plugin.bGColor.getKeys(editorState)}
         />
       </div>
       <div className="toolbar">
-        <Dropdown
-          overlay={borderMemu}
-          onMouseDown={e => {
-            e.preventDefault();
-          }}
-        >
-          <Button>
-            <Icon type="border" style={{ fontSize: 14 }} />
-            <span>border</span>
-            <Icon type="down" />
-          </Button>
-        </Dropdown>
-        <Dropdown
-          overlay={borderRMemu}
-          onMouseDown={e => {
-            e.preventDefault();
-          }}
-        >
-          <Button>
-            <Icon type="radius-setting" style={{ fontSize: 14 }} />
-            <span style={{ width: 40 }}>{borderRLabel}px</span>
-            <Icon type="down" />
-          </Button>
-        </Dropdown>
+        <span className='icon-wrap'>边框</span>
+        {borderSelect}
+        <Divider type="vertical" />
+        <span className='icon-wrap'>圆角</span>
+        {borderRSelect}
         <CPBtn
           name="borderColor"
-          icon="edit"
+          icon={<EditOutlined />}
           title="请选择线框颜色"
           action={color => plugin.borderColor.toggle(color)}
           getKeys={() => plugin.borderColor.getKeys(editorState)}
         />
       </div>
       <div className="toolbar">
-        <Dropdown
-          overlay={blockMemu}
-          onMouseDown={e => {
-            e.preventDefault();
-          }}
-        >
-          <Button>
-            <Icon type="block" style={{ fontSize: 14 }} />
-            <span style={{ width: 60 }}>{blockLabel}</span>
-            <Icon type="down" />
-          </Button>
-        </Dropdown>
+        <span className='icon-wrap'>段落</span>
+        {blockSelect}
         <Divider type="vertical" />
         {plugin.align.map(key => {
           const type = plugin.align.getType(editorState);
@@ -394,14 +360,14 @@ export default props => {
         })}
         <NormalBtn
           disabled={blockType.indexOf('list-item') === -1}
-          icon="menu-unfold"
+          icon={<MenuUnfoldOutlined />}
           action={() => {
             plugin.baseBI.toggle('indent');
           }}
         />
         <NormalBtn
           disabled={blockType.indexOf('list-item') === -1}
-          icon="menu-fold"
+          icon={<MenuFoldOutlined />}
           action={() => {
             plugin.baseBI.toggle('outdent');
           }}

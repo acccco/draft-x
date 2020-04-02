@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { EditorState } from 'draft-js';
-import DraftEdiotr, { serverRender } from 'draft-x';
 import 'draft-x/dist/draft.css';
-import ToolBar, { plugin } from './toolbar/ToolBar';
 import './app.scss';
+
+import React, {Component} from 'react';
+import {EditorState} from 'draft-js';
+import DraftEditor, {serverRender} from 'draft-x';
+import ToolBar, {plugin} from './toolbar/ToolBar';
 
 class App extends Component {
   constructor() {
@@ -29,7 +30,7 @@ class App extends Component {
 
   render() {
     const {
-      state: { editorState }
+      state: {editorState}
     } = this;
 
     return (
@@ -43,7 +44,7 @@ class App extends Component {
         </div>
 
         <div className="editor-wrap">
-          <DraftEdiotr
+          <DraftEditor
             plugin={plugin}
             editorState={editorState}
             onChange={editorState => this.onChange(editorState)}

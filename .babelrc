@@ -1,7 +1,11 @@
 {
   "env": {
     "cjs": {
-      "presets": [["@babel/preset-react"]],
+      "presets": [
+        [
+          "@babel/preset-react"
+        ]
+      ],
       "plugins": [
         [
           "@babel/plugin-transform-runtime",
@@ -20,10 +24,13 @@
         [
           "@babel/preset-env",
           {
-            "useBuiltIns": "entry"
+            "useBuiltIns": "usage",
+            "corejs": "3"
           }
         ],
-        ["@babel/preset-react"]
+        [
+          "@babel/preset-react"
+        ]
       ],
       "plugins": [
         [

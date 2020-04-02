@@ -1,12 +1,5 @@
-/*
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2018-11-15 10:25:23
- * @LastEditTime: 2018-11-15 10:45:11
- * @LastEditors: Please set LastEditors
- */
 import React from 'react';
-import { Upload, message, Button, Icon } from 'antd';
+import { Upload, message, Button } from 'antd';
 
 const props = {
   name: 'file',
@@ -30,7 +23,7 @@ export default function UploadBtn() {
   return (
     <Upload {...props}>
       <Button type="primary">
-        <Icon type="upload" /> 点击上传图片
+        {/*<Icon type="upload" />*/} 点击上传图片
       </Button>
     </Upload>
   );
