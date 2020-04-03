@@ -8,7 +8,7 @@ yarn add draft-x
 
 ## richEditor
 
-[demo](http://acohome.cn/demo/draft/)
+[demo](http://acohome.cn/demo/draft/index.html)
 
 ## coverToHtml
 
