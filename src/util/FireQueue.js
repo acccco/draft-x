@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-20 09:40:12
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 14:58:40
  * @Description: 一个异步队列
  */
 

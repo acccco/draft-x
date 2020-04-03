@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-05 09:26:47
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 10:26:55
  * @Description: 实现对 block type 的控制以及呈现
  */
 

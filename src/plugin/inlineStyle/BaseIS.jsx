@@ -1,14 +1,12 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-02 15:03:10
  * @LastEditors: Aco
- * @LastEditTime: 2019-02-20 10:20:32
  * @Description: 基础的样式插件类，为选中区域添加样式，该类为基础类，使用时需继承该类
  */
 
 import { EditorState, Modifier, RichUtils } from 'draft-js';
-import Base from '../Base';
 import { List } from 'immutable';
+import Base from '../Base';
 
 export default class BaseIS extends Base {
   constructor(unique = true) {

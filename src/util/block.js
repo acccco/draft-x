@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-20 09:40:12
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-23 16:11:58
  * @Description: 关于 block 的一些操作
  */
 
@@ -12,10 +10,9 @@ import { Map } from 'immutable';
 
 export function getBlock(editorState) {
   const selection = editorState.getSelection();
-  const block = editorState
+  return editorState
     .getCurrentContent()
     .getBlockForKey(selection.getStartKey());
-  return block;
 }
 
 export function getBlockData(editorState) {

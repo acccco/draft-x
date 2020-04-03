@@ -1,15 +1,12 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-05 10:58:33
  * @LastEditors: Aco
- * @LastEditTime: 2019-02-20 11:02:37
  * @Description: 用于添加图片
  */
 
 import React from 'react';
-import { EditorState, Modifier } from 'draft-js';
 import BaseAtomic from './BaseAtomic';
-import { getEnv, getStartEntityKey } from '../../util';
+import { getBlockData, getEnv, setBlockData } from '../../util';
 
 export default class Image extends BaseAtomic {
   constructor() {
@@ -96,12 +93,9 @@ export default class Image extends BaseAtomic {
 
   replaceData(data) {
     this.fire(editorState => {
-      const entityKey = getStartEntityKey(editorState);
-      let contentState = editorState.getCurrentContent();
-      let selection = editorState.getSelection();
-      contentState = contentState.mergeEntityData(entityKey, data);
-      contentState = Modifier.applyEntity(contentState, selection, entityKey);
-      return EditorState.push(editorState, contentState, 'apply-entity');
+      const blockData = getBlockData(editorState);
+      let prevData = blockData.toJSON();
+      return setBlockData(editorState, { ...prevData, ...data });
     });
   }
 }

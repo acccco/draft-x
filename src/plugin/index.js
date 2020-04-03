@@ -1,9 +1,7 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-23 09:27:56
  * @LastEditors: Aco
- * @LastEditTime: 2019-02-19 16:26:04
- * @Description: file content
+ * @Description: 所有的插件
  */
 
 export { default as BasePlugin } from './Base';

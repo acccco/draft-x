@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-21 15:11:32
  * @LastEditors: Aco
- * @LastEditTime: 2019-01-22 15:40:43
  * @Description: 插入一个 iframe
  */
 import React from 'react';

@@ -39,7 +39,7 @@ export default class BaseAtomicase extends Base {
       block.getType() === 'atomic' &&
       block.getData().get('atomicType') === this.atomicType
     )
-      return `RichEditor-media RichEditor-${this.atomicType}`;
+      return `RichEditor-media RichEditor-${this.atomicType.toLowerCase()}`;
     return '';
   }
 

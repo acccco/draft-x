@@ -7,10 +7,7 @@ export default function NormalBtn(props) {
     <Button
       disabled={disabled}
       className={active ? 'active' : ''}
-      onMouseDown={e => {
-        e.preventDefault();
-        action();
-      }}
+      onClick={action}
     >
       {icon}
     </Button>

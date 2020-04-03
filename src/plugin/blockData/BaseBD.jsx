@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-06 09:21:53
  * @LastEditors: Aco
- * @LastEditTime: 2018-12-03 09:38:35
  * @Description: 实现对 block data 的控制以及呈现
  */
 
@@ -33,11 +31,13 @@ export default class BaseBS extends Base {
   toggle(type) {
     this.fire(editorState => {
       const blockData = getBlockData(editorState);
-      let toggleType = type;
+      let prevData = blockData.toJSON();
       if (blockData.get(this.name) === type) {
-        toggleType = '';
+        prevData[this.name] = '';
+      } else {
+        prevData[this.name] = type;
       }
-      return setBlockData(editorState, { [this.name]: toggleType });
+      return setBlockData(editorState, prevData);
     });
   }
 }

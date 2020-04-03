@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-06 09:21:53
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-14 17:18:50
  * @Description: text-align
  */
 

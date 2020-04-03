@@ -1,19 +1,13 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-02 15:04:44
  * @LastEditors: Aco
- * @LastEditTime: 2019-02-26 16:11:08
  * @Description: 基础的标签插件，用于为选中区域外添加一个标签，该类为基础类，使用时需继承该类
  */
 
 import React from 'react';
 import { RichUtils } from 'draft-js';
 import Base from '../Base';
-import {
-  createNewEntity,
-  getStartEntityKey,
-  findEntityRange
-} from '../../util';
+import { createNewEntity, getStartEntityKey, findEntityRange } from '../../util';
 
 export default class BaseIT extends Base {
   constructor() {

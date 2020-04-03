@@ -1,8 +1,6 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-06 12:21:19
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2018-11-16 16:02:36
+ * @LastEditors: Aco
  * @Description: 为选中区域移除标签
  */
 

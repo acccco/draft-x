@@ -1,10 +1,9 @@
 import 'antd/dist/antd.css';
-import './Rich.scss';
+import './tools/Rich.scss';
 
 import React from 'react';
 import { Button, Divider, Select } from 'antd';
 import {
-  FontSizeOutlined,
   UndoOutlined,
   RedoOutlined,
   DeleteOutlined,
@@ -17,13 +16,11 @@ import {
   EditOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  BorderOuterOutlined,
-  RadiusUpleftOutlined
 } from '@ant-design/icons';
 import {
   NormalStyle,
-  RemoveStyle,
   CustomStyle,
+  RemoveStyle,
   BaseBT,
   CustomBT,
   Align,
@@ -35,18 +32,16 @@ import {
   Video,
   Undo,
   Redo,
-  Iframe,
   BaseBI,
   getBlock
 } from 'draft-x';
-import { LinkBtn, NormalBtn, MediaBtn, CPBtn, Atomic } from '.';
-import { getInlineIcon, getBlockIcon } from './getItemShow';
-import Test from '../plugin/Test';
+import { LinkBtn, NormalBtn, MediaBtn, CPBtn, Atomic } from './tools';
+import { getInlineIcon, getBlockIcon } from './tools/getItemShow';
 
 const { Option } = Select;
 
 export const plugin = {
-  textUnUnipue: new NormalStyle({
+  textUnUnique: new NormalStyle({
     bold: {
       fontWeight: 'bold'
     },
@@ -60,18 +55,18 @@ export const plugin = {
       fontStyle: 'italic'
     }
   }),
-  textUnipue: new NormalStyle(
+  textUnique: new NormalStyle(
     {
       top: {
         position: 'relative',
         top: '-8px',
-        display: 'inline-flex',
+        display: 'inline',
         fontSize: '12px'
       },
       bottom: {
         position: 'relative',
         bottom: '-8px',
-        display: 'inline-flex',
+        display: 'inline',
         fontSize: '12px'
       }
     },
@@ -106,9 +101,7 @@ export const plugin = {
   customBT: new CustomBT(['Rich-desc']),
   undoPlugin: new Undo(),
   redoPlugin: new Redo(),
-  iframe: new Iframe(),
-  baseBI: new BaseBI(),
-  test: new Test()
+  baseBI: new BaseBI()
 };
 
 export default props => {
@@ -125,8 +118,7 @@ export default props => {
         <Option
           key={key}
           value={key}
-          onMouseDown={e => {
-            e.preventDefault();
+          onMouseDown={() => {
             plugin.baseBT.toggle(key);
           }}
         >
@@ -137,8 +129,7 @@ export default props => {
         <Option
           key={key}
           value={key}
-          onMouseDown={e => {
-            e.preventDefault();
+          onMouseDown={() => {
             plugin.customBT.toggle(key);
           }}
         >
@@ -240,7 +231,7 @@ export default props => {
         <MediaBtn
           icon={<PictureOutlined />}
           title="请输入图片资源地址"
-          placeholder="media.png"
+          placeholder="可直接输入 media.png"
           action={data => {
             const img = new Image();
             img.src = data.src;
@@ -256,13 +247,13 @@ export default props => {
         <MediaBtn
           icon={<SoundOutlined />}
           title="请输入音频资源地址"
-          placeholder="media.mp3"
+          placeholder="可直接输入 media.mp3"
           action={data => plugin.audio.toggle(data)}
         />
         <MediaBtn
           icon={<VideoCameraAddOutlined />}
           title="请输入视频资源地址"
-          placeholder="media.mp4"
+          placeholder="可直接输入 media.mp4"
           action={data => plugin.video.toggle(data)}
         />
       </div>
@@ -270,29 +261,29 @@ export default props => {
         <span className='icon-wrap'>字号</span>
         {fontSizeSelect}
         <Divider type="vertical" />
-        {plugin.textUnUnipue.map(key => {
-          const keys = plugin.textUnUnipue.getKeys(editorState);
+        {plugin.textUnUnique.map(key => {
+          const keys = plugin.textUnUnique.getKeys(editorState);
           return (
             <NormalBtn
               key={key}
               icon={getInlineIcon(key)}
               active={keys.has(key)}
               action={() => {
-                plugin.textUnUnipue.toggle(key);
+                plugin.textUnUnique.toggle(key);
               }}
             />
           );
         })}
         <Divider type="vertical" />
-        {plugin.textUnipue.map(key => {
-          const keys = plugin.textUnipue.getKeys(editorState);
+        {plugin.textUnique.map(key => {
+          const keys = plugin.textUnique.getKeys(editorState);
           return (
             <NormalBtn
               key={key}
               icon={getInlineIcon(key)}
               active={keys.has(key)}
               action={() => {
-                plugin.textUnipue.toggle(key);
+                plugin.textUnique.toggle(key);
               }}
             />
           );
@@ -397,15 +388,7 @@ export default props => {
         />
       </div>
       <div className="toolbar">
-        <Button onClick={() => logHtml()}>log html</Button>
-        <Button
-          onMouseDown={e => {
-            e.preventDefault();
-            plugin.test.toggle();
-          }}
-        >
-          test
-        </Button>
+        <Button onClick={logHtml}>log html</Button>
       </div>
     </div>
   );

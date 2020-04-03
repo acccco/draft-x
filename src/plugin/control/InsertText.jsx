@@ -1,21 +1,18 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-07 13:22:13
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-23 13:15:46
  * @Description: 在光标区域插入特定的文本
  */
-import React from "react";
-import { EditorState, Modifier } from "draft-js";
-import Base from "../Base";
-import { createNewEntity, findEntityRange } from "../../util";
+import React from 'react';
+import { EditorState, Modifier } from 'draft-js';
+import Base from '../Base';
+import { createNewEntity, findEntityRange } from '../../util';
 
 export default class Insert extends Base {
-  constructor(textList = []) {
+  constructor() {
     super();
-    this.textList = textList;
-    this.entityType = "Insert";
-    this.entityKey = "";
+    this.entityType = 'Insert';
+    this.entityKey = '';
     this.decorator = {
       strategy: this.strategy.bind(this),
       component: this.component.bind(this)
@@ -29,7 +26,7 @@ export default class Insert extends Base {
         editorState,
         {
           entityType: this.entityType,
-          mutability: "IMMUTABLE",
+          mutability: 'IMMUTABLE',
           data: {}
         }
       );
@@ -50,6 +47,7 @@ export default class Insert extends Base {
       </span>
     );
   }
+
   /* eslint-enable */
 
   toggle(text) {
@@ -60,24 +58,24 @@ export default class Insert extends Base {
       editorState = EditorState.push(
         editorState,
         Modifier.removeRange(nextContentState, selection),
-        "remove-range"
+        'remove-range'
       );
 
       selection = editorState.getSelection();
-      nextContentState = Modifier.insertText(nextContentState, selection, " ");
+      nextContentState = Modifier.insertText(nextContentState, selection, ' ');
       nextContentState = Modifier.insertText(
         nextContentState,
         selection,
         text,
-        "",
+        '',
         this.entityKey
       );
-      nextContentState = Modifier.insertText(nextContentState, selection, " ");
+      nextContentState = Modifier.insertText(nextContentState, selection, ' ');
 
       return EditorState.push(
         editorState,
         nextContentState,
-        "insert-characters"
+        'insert-characters'
       );
     });
   }

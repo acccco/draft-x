@@ -10,6 +10,9 @@ import { FireQueue } from '../util';
 
 const fireQueue = new FireQueue();
 
+const noop = () => {
+};
+
 export default class Base {
   constructor() {
     fireQueue.setGetInit(() => this.getEditorState());
@@ -20,9 +23,10 @@ export default class Base {
     throw new Error('请确认是否调用了插件的 init 方法');
   }
 
-  applyChange() {}
+  applyChange() {
+  }
 
-  init(getEditorState, applyChange = () => {}) {
+  init(getEditorState, applyChange = noop) {
     this.getEditorState = getEditorState;
     this.applyChange = applyChange;
   }

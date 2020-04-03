@@ -1,16 +1,14 @@
 /*
  * @Author: Aco
- * @Date: 2018-11-02 15:09:59
  * @LastEditors: Aco
- * @LastEditTime: 2018-11-27 11:13:01
- * @Description: 一些自定义样式
+ * @Description: 使用自定义样式渲染选中文本
  */
 
 import BaseIS from './BaseIS';
 
 export default class NormalStyle extends BaseIS {
-  constructor(map, isUnipue = false) {
-    super(isUnipue);
+  constructor(map, isUnique = false) {
+    super(isUnique);
     this.customStyleMap = map;
   }
 

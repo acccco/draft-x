@@ -1,11 +1,3 @@
-/*
- * @Author: Aco
- * @Date: 2018-11-02 15:02:21
- * @LastEditors: Aco
- * @LastEditTime: 2019-01-21 14:28:14
- * @Description: 对外暴露的 Draft 实例
- */
-
 import React from 'react';
 import {
   Editor,
