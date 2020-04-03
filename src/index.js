@@ -6,4 +6,4 @@ export * from './plugin';
 export * from './util';
 export * from 'draft-js';
 
-export const version = '0.2.3';
+export const version = '0.3.0';
