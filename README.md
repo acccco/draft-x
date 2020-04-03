@@ -38,7 +38,7 @@ const html = draftX.toHtml(json);
 
 ### editorState
 
-由 `draft-x` 下  的 `EditorState` 类创建，一般为 `EditorState.createEmpty()`。
+由 `draft-x` 下的 `EditorState` 类创建，一般为 `EditorState.createEmpty()`。
 
 ```js
 import {EditorState} from "draft-x";
@@ -204,7 +204,7 @@ Regex#constructor(/@[\w]+/g, {
 
 构造函数的第二个参数，就是一组 `css` 样式，当匹配到文字时会应用。
 
-#### CustomStyle  定义文字样式
+#### CustomStyle 定义文字样式
 
 ```js
 CustomStyle#constructor('color');     // 生成一个修改文字颜色的插件
