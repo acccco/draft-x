@@ -8,9 +8,7 @@ yarn add draft-x
 
 ## richEditor
 
-[demo][1]
-
-[code][2]
+[demo](http://acohome.cn/demo/draft/)
 
 ## coverToHtml
 
@@ -22,11 +20,9 @@ const html = draftX.toHtml(json);
 
 **注:** `json` 可以通过 `DraftEdiotr` 实例下的 `getRaw` 获取，使用官方提供的 `convertToRaw` 会有部分数据的缺失。
 
-[demo][3]
-
 ## use
 
-[code][4]
+[code](https://github.com/acccco/draft-x/tree/master/example/richEditor)
 
 组件必须传入 `plugin` (使用的插件)，`editorState` (初始的 EditorState 对象)，`onChange` (当编辑器内容发生变化时的执行函数)。
 
@@ -42,9 +38,11 @@ const html = draftX.toHtml(json);
 
 ### editorState
 
-由 [draft-js][5] 下  的 `EditorState` 类创建，一般为 `EditorState.createEmpty()`。
+由 `draft-x` 下  的 `EditorState` 类创建，一般为 `EditorState.createEmpty()`。
 
 ```js
+import {EditorState} from "draft-x";
+
 // ...
 this.state = {
   editorState: EditorState.createEmpty()
@@ -68,8 +66,8 @@ onChange(editorState) {
 
 ```js
 {
-    imagePlugin: new Image(),
-    audioPlugin: new Audio(),
+    imagePlugin: new imagePlugin(),
+    audioPlugin: new audioPlugin(),
     ...
 }
 ```
@@ -282,13 +280,3 @@ Link#getEntity();                           // 获取实体，调用返回对�
 ```js
 RemoveTag#toggle();                         // 为选中区域取消链接
 ```
-
-#### 更多插件
-
-未完待续...
-
-[1]: http://acohome.cn/demo/draft/
-[2]: https://github.com/acccco/draft-x/tree/master/example/richEditor
-[3]: https://github.com/acccco/draft-x/tree/master/example/toHtml/index.js
-[4]: https://github.com/acccco/draft-x/tree/master/example/richEditor
-[5]: https://draftjs.org/docs/getting-started
